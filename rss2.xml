@@ -9,13 +9,13 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>星座になれたら。</description>
-    <pubDate>Mon, 01 Jan 2024 11:17:38 GMT</pubDate>
+    <pubDate>Fri, 05 Jan 2024 14:45:22 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title>第一篇博客</title>
-      <link>http://example.com/inori/undefined.html</link>
-      <guid>http://example.com/inori/undefined.html</guid>
+      <link>http://example.com/inori/ff05b5bf.html</link>
+      <guid>http://example.com/inori/ff05b5bf.html</guid>
       <pubDate>Mon, 01 Jan 2024 11:15:52 GMT</pubDate>
       
         
@@ -30,14 +30,14 @@
       
       
       
-      <comments>http://example.com/inori/undefined.html#disqus_thread</comments>
+      <comments>http://example.com/inori/ff05b5bf.html#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Hello World</title>
-      <link>http://example.com/inori/undefined.html</link>
-      <guid>http://example.com/inori/undefined.html</guid>
+      <link>http://example.com/inori/4a17b156.html</link>
+      <guid>http://example.com/inori/4a17b156.html</guid>
       <pubDate>Sun, 31 Dec 2023 10:08:40 GMT</pubDate>
       
         
@@ -52,7 +52,7 @@
       
       
       
-      <comments>http://example.com/inori/undefined.html#disqus_thread</comments>
+      <comments>http://example.com/inori/4a17b156.html#disqus_thread</comments>
       
     </item>
     
