@@ -3,20 +3,20 @@
   xmlns:atom="http://www.w3.org/2005/Atom"
   xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>楪祈りのBlog</title>
+    <title>楪祈のBlog</title>
     <link>http://example.com/</link>
     
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>星座になれたら。</description>
-    <pubDate>Fri, 05 Jan 2024 14:45:22 GMT</pubDate>
+    <pubDate>Sat, 06 Jan 2024 08:28:35 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title>第一篇博客</title>
       <link>http://example.com/inori/ff05b5bf.html</link>
       <guid>http://example.com/inori/ff05b5bf.html</guid>
-      <pubDate>Mon, 01 Jan 2024 11:15:52 GMT</pubDate>
+      <pubDate>Mon, 01 Jan 2024 11:15:00 GMT</pubDate>
       
         
         
