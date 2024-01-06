@@ -9,7 +9,7 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>星座になれたら。</description>
-    <pubDate>Sat, 06 Jan 2024 11:42:13 GMT</pubDate>
+    <pubDate>Sat, 06 Jan 2024 12:48:45 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -39,18 +39,23 @@
       <title>Hello World</title>
       <link>http://example.com/inori/4a17b156.html</link>
       <guid>http://example.com/inori/4a17b156.html</guid>
-      <pubDate>Sun, 31 Dec 2023 10:08:40 GMT</pubDate>
+      <pubDate>Sun, 31 Dec 2023 15:00:00 GMT</pubDate>
       
         
         
-      <description>&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</description>
+      <description>&lt;p&gt;费了不少劲！终于把我的博客搭好了！&lt;/p&gt;
+&lt;h3 id=&quot;所用技术&quot;&gt;&lt;a href=&quot;#所用技术&quot; class=&quot;headerlink&quot; title=&quot;所用技术&quot;&gt;&lt;/a&gt;所用技术&lt;/h3&gt;&lt;p&gt;​	本网站使用GitHub后端+Hexo框架+Butterfly渲染，并在</description>
         
       
       
       
-      <content:encoded><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>费了不少劲！终于把我的博客搭好了！</p><h3 id="所用技术"><a href="#所用技术" class="headerlink" title="所用技术"></a>所用技术</h3><p>​本网站使用GitHub后端+Hexo框架+Butterfly渲染，并在基础上做出了一小部分魔改，加了些花里胡哨的东西，域名在阿里云选购。</p><hr><p>​就说这么多吧，后续我争取做到把每日学到的东西做一个总结，更新在这里，希望可以用这种方法来加深我对知识的理解与记忆。</p>]]></content:encoded>
       
       
+      <category domain="http://example.com/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/">碎碎念</category>
+      
+      
+      <category domain="http://example.com/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/">碎碎念</category>
       
       
       <comments>http://example.com/inori/4a17b156.html#disqus_thread</comments>
