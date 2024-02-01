@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>java基础入门（三）</title>
+      <link href="/inori/9235e063.html"/>
+      <url>/inori/9235e063.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="枚举类"><a href="#枚举类" class="headerlink" title="枚举类"></a>枚举类</h2><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ol><li>使用关键字enum代替class，默认会继承Enum类</li><li><code>public static final 类名 = new 类名(参数)</code>直接使用<code>类名(参数)</code>代替，这种语法会默认调用该类的构造器，如果有无参构造器可以不填参数</li><li>如果有多个常量对象，使用<code>,</code>间隔</li><li>创建的对象放在枚举类的行首</li><li>Enum类不可在外部创建对象，因为其构造器为私有</li></ol><h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><table><thead><tr><th align="center">方法名</th><th align="left">详细描述</th></tr></thead><tbody><tr><td align="center">valueOf</td><td align="left">通过字符串找到叫该名字的枚举对象，如果没找到会报异常</td></tr><tr><td align="center">toString</td><td align="left">返回枚举对象的名称，通常会在枚举类中重写该方法</td></tr><tr><td align="center">values</td><td align="left">隐藏在枚举类中的方法，返回一个数组，含有全部定义的枚举对象</td></tr><tr><td align="center">ordinal</td><td align="left">输出该枚举对象的定义次序，从0开始编号</td></tr><tr><td align="center">compareTo</td><td align="left">比较两个枚举对象，按照定义次序比较，返回前面的枚举常量编号减去后面的枚举常量编号</td></tr></tbody></table><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol><li>使用enum关键字后不能继承其他类（enum会隐式的继承Enum类）</li><li>枚举类的普通类一样可以实现接口</li></ol><h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>注解(Annotation)也叫做元数据(Metadata)，用于解释包、类、方法、属性、构造器、局部变量等数据信息。注解不影响程序逻辑，但是可以被编译，相当于嵌入在代码中的补充信息。</p><h3 id="常用的注解符号"><a href="#常用的注解符号" class="headerlink" title="常用的注解符号"></a>常用的注解符号</h3><ol><li><p><code>@Override</code>重写某个父类方法，该注解只能用于方法</p></li><li><p><code>@Deprecated</code>表示某个程序元素已过时，即不推荐使用</p></li><li><p><code>@SuppressWarnings</code>抑制编译器警告，一般使用all，语法<code>@SuppressWarnings(&#123;&quot;all&quot;&#125;)</code></p></li><li><p><code>@interface</code>用于定义了注解类，之后用到再细说</p></li><li><p>元注解</p><ul><li><code>@Retention</code>指定注解的作用范围，有三种类型：<code>SOURCE</code>源码时，<code>CLASS</code>类中，<code>RUNTIME</code>运行时</li><li><code>@Target</code>指定注解可以在哪些地方使用</li><li><code>@Documented</code>指定该注解是否会在javadoc体现</li><li><code>@Inherited</code>子类继承父类的注解</li></ul></li></ol><h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>未完待续。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> java基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>java基础入门（二）</title>
       <link href="/inori/df2b4331.html"/>
       <url>/inori/df2b4331.html</url>
@@ -146,6 +171,31 @@
         <tags>
             
             <tag> LeetCode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>一些碎碎念</title>
+      <link href="/inori/303572a2.html"/>
+      <url>/inori/303572a2.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="2024-1-1"><a href="#2024-1-1" class="headerlink" title="2024.1.1"></a>2024.1.1</h3><p>​很久以前就想着搭一个个人博客，但是一直拖着没搞，昨天晚上闲来无事，突然想到这件事，一口气搞出来了。说是个人博客，主要是当我的笔记本用吧，博客里面很多东西都没弄懂，也没弄好。</p><p>​目标是缓慢且持续的更新，学啥更啥…</p><h3 id="2024-1-26"><a href="#2024-1-26" class="headerlink" title="2024.1.26"></a>2024.1.26</h3><p>​终于把期末考试的事搞完了，我认为研究生上的课，不对，应该是本科和研究生上的课不能说是毫无用处，只能说是屁用没有，占用自学的时间，在那坐着浪费时间，老师在课上讲一些已经与当前正在应用的技术脱节很久的老知识，关键是课程报告和结课论文还需要用这些东西，学这些东西以后又用不上，又要浪费一大段时间。唉</p><h3 id="2024-2-1"><a href="#2024-2-1" class="headerlink" title="2024.2.1"></a>2024.2.1</h3><p>​放寒假了，实验室布置了一堆任务，但是我自己还想要自学很多东西，好像放假比不放假还难受。现在开始继续学习并且更新博客了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 碎碎念 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 碎碎念 </tag>
             
         </tags>
       
