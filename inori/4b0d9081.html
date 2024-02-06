@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>java集合 | 楪祈のBlog</title><meta name="author" content="楪舞飞祈"><meta name="copyright" content="楪舞飞祈"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="java集合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java集合">
+<meta property="og:url" content="http://example.com/inori/4b0d9081.html">
+<meta property="og:site_name" content="楪祈のBlog">
+<meta property="og:description" content="java集合">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgapi.xl0408.top/index.php">
+<meta property="article:published_time" content="2024-02-04T10:37:45.000Z">
+<meta property="article:modified_time" content="2024-02-05T14:36:01.011Z">
+<meta property="article:author" content="楪舞飞祈">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgapi.xl0408.top/index.php"><link rel="shortcut icon" href="/img/favicon_32.png"><link rel="canonical" href="http://example.com/inori/4b0d9081.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'java集合',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-05 22:36:01'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/rss2.xml" title="楪祈のBlog" type="application/rss+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://imgapi.xl0408.top/index.php')"><nav id="nav"><span id="blog-info"><a href="/" title="楪祈のBlog"><span class="site-name">楪祈のBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">java集合</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-04T10:37:45.000Z" title="发表于 2024-02-04 18:37:45">2024-02-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-05T14:36:01.011Z" title="更新于 2024-02-05 22:36:01">2024-02-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/java%E5%9F%BA%E7%A1%80/">java基础</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="java集合"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="集合的好处"><a href="#集合的好处" class="headerlink" title="集合的好处"></a>集合的好处</h2><p>之前保存多个数据的时候一直都是用的数组，但是数组</p>
+<ol>
+<li>长度开始时必须指定，而且一旦指定，不能更改</li>
+<li>保存的必须为同一类型的元素</li>
+<li>使用数组进行增加&#x2F;删除元素时比较麻烦</li>
+</ol>
+<p>但是集合避免了这些缺点，可以动态保存任意多个对象。</p>
+<p>常用的集合主要可以分为两类</p>
+<ol>
+<li>单列集合Collection<ul>
+<li>List：ArrayList、LinkedList、Vector</li>
+<li>Set：HashSet、TreeSet</li>
+</ul>
+</li>
+<li>双列集合Map：HashMap、TreeMap、Hashtable、Properties</li>
+</ol>
+<h2 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h2><p>Collection是一个接口，不可以实例化。该类提供了一些通用方法，供实现该接口的类使用。</p>
+<ol>
+<li>size：集合中元素个数</li>
+<li>isEmpty：检查集合是否为空</li>
+<li>clear：清空集合</li>
+</ol>
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><p>List实现了Collection接口，除了通用方法外，还含有：</p>
+<ol>
+<li>add（i,b)：把b元素添加到集合的i位置</li>
+<li>addAll(i,b)：从i位置开始，把b中所有元素添加进来</li>
+<li>get(i)：得到i位置上的元素</li>
+<li>indexOf(a)&#x2F;lastIndexOf(a)：返回a在List中第一次&#x2F;最后一次出现的位置</li>
+<li>remove(i)：移除并返回i位置上的元素</li>
+<li>set(i,a)：将位置i上的元素替换成a</li>
+<li>subList(i,j)：返回集合下标[i,j)的子集</li>
+</ol>
+<p><strong>ArrayList的扩容机制</strong>：当实例化对象时，可以指定大小。如果使用的无参构造器，则初始化大小为0，添加元素时，扩容为10。无论是否指定了初始大小，如果需要再次扩容，则每次扩充为原大小的1.5倍。</p>
+<p><strong>Vector的扩容机制</strong>：当实例化对象时，可以指定大小。如果使用无参构造器，则初始化大小为10。如果需要扩容则按照两倍扩容。</p>
+<p>Vector相比于ArrayList效率较低，但是Vector在源码中添加了<code>synchronized</code>修饰，保证了线程安全，因此在开发中，需要线程同步安全时，要考虑Vector。</p>
+<p><strong>LinkedList</strong>：本质是双向链表，具有双向链表的一切特性，头尾部增删很快，改查很慢，不适合改查操作多的环境。</p>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p>集合内元素唯一，且不能通过索引查找，遍历顺序不能保证与插入顺序一致。可以使用<code>add</code>、<code>remove</code>方法。</p>
+<h4 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h4><ul>
+<li>HashSet的底层是HashMap</li>
+<li>添加一个元素时，先得到hash值，使用hash值转化成索引值</li>
+<li>找到存储数据表table，看这个索引位置是否有已经存放的元素，如果没有就加入，如果有并且元素不同（使用equals比较），就添加到最后</li>
+<li>在jdk8中，如果一条链表长度超过<code>TREEIFY_THRESHOLD</code>（默认是8），并且table大小≥<code>MIN_TREEIFY_CAPACITY</code>（默认是64），就会变成红黑树。</li>
+<li>第一次添加元素时，table数组扩容到16，<code>临界值=threShold*loadFactor=最大长度*0.75=16*0.75=12</code></li>
+<li>如果数组长度到了临界值，就会再次进行扩容，<code>容量=当前最大长度*2</code>，直到达到了树化条件，<code>新的临界值=最大长度*0.75</code></li>
+<li>如果想保证元素的遍历顺序等于插入顺序，可以使用<strong>LinkedHashSet</strong>。</li>
+</ul>
+<h4 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h4><p>TreeSet是即有序集合，底层基于红黑树，能够确保集合元素按照升序或降序排列。</p>
+<p>相比于HashSet新增的方法有：</p>
+<ol>
+<li>firse&#x2F;last：获取第一个&#x2F;最后一个元素</li>
+<li>floor(a)&#x2F;ceiling(a)：获取小于等于&#x2F;大于等于a的最大&#x2F;最小元素</li>
+</ol>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>Map与Collection并列存在，用于保存具有映射关系的数据：键值对。Map中的key和value可以是任何引用类型的数据，会封装到HashMap$Node对象中。</p>
+<p>Map接口常用方法：</p>
+<ol>
+<li><code>put(key, value)</code>：添加键值对</li>
+<li><code>remove()</code>：根据键删除映射关系</li>
+<li><code>get(key)</code>：根据键获取值</li>
+<li>size：获取元素个数</li>
+<li>isEmpty：判断Map是否为空</li>
+<li>clear：清空</li>
+<li>containsKey：查找键是否存在</li>
+<li>keySet：返回所有键的集合</li>
+</ol>
+<p>HashMap键值对的两种遍历方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> Map&lt;String, Integer&gt; hashMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">// 1.遍历键，找到值</span></span><br><span class="line">        <span class="keyword">for</span> (String key: hashMap.keySet())&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> hashMap.get(key);</span><br><span class="line">            System.out.println(key + <span class="string">&quot;: &quot;</span> + value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 2.使用entrySet获取键值对</span></span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, Integer&gt; entry : hashMap.entrySet()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> entry.getKey();</span><br><span class="line">            <span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> entry.getValue();</span><br><span class="line">            System.out.println(key + <span class="string">&quot;: &quot;</span> + value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>HashMap没有实现同步，不保证线程安全。</p>
+<p>HashTable与HashMap使用的方法基本一致，区别在于：</p>
+<ol>
+<li>HashTable的键和值都不能为null，否则会报空指针异常</li>
+<li>HashTable是线程安全的，多个线程不能同时修改HashTable中的内容</li>
+<li>HashTable在性能上比HashMap略差</li>
+</ol>
+<p>Properties类是用于处理属性文件的类，继承自HashTable类，并实现了Map接口，特点与HashTable类似。Properties主要用于从properties文件中加载数据到Properties类对象，并进行读取和修改。</p>
+<p>方法：</p>
+<ol>
+<li><code>setProperty(key, value)</code>：添加属性</li>
+<li><code>getProperty(key)</code>：获取属性</li>
+<li>load：加载属性文件</li>
+<li>store：保存属性文件</li>
+</ol>
+<p>TreeMap即有序键值对，可以保证插入的键有序排列，方法与HashMap大致相同，但是TreeMap不允许键为null，只允许值接null。</p>
+<h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2><p>Collections是一个操作Set、List、Map等集合的工具类，其中提供了一系列的static方法对元素进行排序、查询和修改等操作。</p>
+<p>主要方法：</p>
+<ol>
+<li>sort：对List进行升序排序，其中可以编写比较器对List指定排序方法</li>
+<li>shuffle：打乱List中元素的顺序</li>
+<li>reverse：对List进行翻转</li>
+<li>swap：交换List中两个元素的位置</li>
+<li>max&#x2F;min：返回集合中最大&#x2F;最小的元素</li>
+<li><code>frequency(Collection, Object)</code>：返回Collection集合中Object的出现次数</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">楪舞飞祈</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/inori/4b0d9081.html">http://example.com/inori/4b0d9081.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">楪祈のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/java/">java</a></div><div class="post_share"><div class="social-share" data-image="https://imgapi.xl0408.top/index.php" data-sites="qq,wechat,twitter,weibo"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/inori/12697782.html" title="java常用类及其方法"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">java常用类及其方法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/inori/12697782.html" title="java常用类及其方法"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-02</div><div class="title">java常用类及其方法</div></div></a></div><div><a href="/inori/9235e063.html" title="java基础入门（三）"><img class="cover" src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-01</div><div class="title">java基础入门（三）</div></div></a></div><div><a href="/inori/df2b4331.html" title="java基础入门（二）"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-14</div><div class="title">java基础入门（二）</div></div></a></div><div><a href="/inori/ef3dafe9.html" title="java基础入门（一）"><img class="cover" src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-10</div><div class="title">java基础入门（一）</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">楪舞飞祈</div><div class="author-info__description">星座になれたら。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/inori-320"><i class="fab fa-github"></i><span>My GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:719471785@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p align="center" color="brown">多读书，多看报，少吃零食，多睡觉。</p></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-number">1.</span> <span class="toc-text">集合的好处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Collection"><span class="toc-number">2.</span> <span class="toc-text">Collection</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#List"><span class="toc-number">2.1.</span> <span class="toc-text">List</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set"><span class="toc-number">2.2.</span> <span class="toc-text">Set</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HashSet"><span class="toc-number">2.2.1.</span> <span class="toc-text">HashSet</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TreeSet"><span class="toc-number">2.2.2.</span> <span class="toc-text">TreeSet</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map"><span class="toc-number">3.</span> <span class="toc-text">Map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Collections%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="toc-number">4.</span> <span class="toc-text">Collections工具类</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/inori/4b0d9081.html" title="java集合"><img src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java集合"/></a><div class="content"><a class="title" href="/inori/4b0d9081.html" title="java集合">java集合</a><time datetime="2024-02-04T10:37:45.000Z" title="发表于 2024-02-04 18:37:45">2024-02-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/12697782.html" title="java常用类及其方法"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java常用类及其方法"/></a><div class="content"><a class="title" href="/inori/12697782.html" title="java常用类及其方法">java常用类及其方法</a><time datetime="2024-02-02T07:05:41.000Z" title="发表于 2024-02-02 15:05:41">2024-02-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/9235e063.html" title="java基础入门（三）"><img src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java基础入门（三）"/></a><div class="content"><a class="title" href="/inori/9235e063.html" title="java基础入门（三）">java基础入门（三）</a><time datetime="2024-02-01T00:40:08.000Z" title="发表于 2024-02-01 08:40:08">2024-02-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/df2b4331.html" title="java基础入门（二）"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java基础入门（二）"/></a><div class="content"><a class="title" href="/inori/df2b4331.html" title="java基础入门（二）">java基础入门（二）</a><time datetime="2024-01-14T04:55:55.000Z" title="发表于 2024-01-14 12:55:55">2024-01-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/ef3dafe9.html" title="java基础入门（一）"><img src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java基础入门（一）"/></a><div class="content"><a class="title" href="/inori/ef3dafe9.html" title="java基础入门（一）">java基础入门（一）</a><time datetime="2024-01-10T04:55:28.000Z" title="发表于 2024-01-10 12:55:28">2024-01-10</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://imgapi.xl0408.top/index.php')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 楪舞飞祈</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
