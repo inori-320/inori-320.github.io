@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>JDBC和连接池 | 楪祈のBlog</title><meta name="author" content="楪舞飞祈"><meta name="copyright" content="楪舞飞祈"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="JDBC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDBC和连接池">
+<meta property="og:url" content="http://example.com/inori/78c36787.html">
+<meta property="og:site_name" content="楪祈のBlog">
+<meta property="og:description" content="JDBC">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://api.suyanw.cn/api/comic3.php">
+<meta property="article:published_time" content="2024-03-02T04:43:24.000Z">
+<meta property="article:modified_time" content="2024-03-03T06:32:16.137Z">
+<meta property="article:author" content="楪舞飞祈">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://api.suyanw.cn/api/comic3.php"><link rel="shortcut icon" href="/img/favicon_32.png"><link rel="canonical" href="http://example.com/inori/78c36787.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'JDBC和连接池',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-03 14:32:16'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/rss2.xml" title="楪祈のBlog" type="application/rss+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.suyanw.cn/api/comic3.php')"><nav id="nav"><span id="blog-info"><a href="/" title="楪祈のBlog"><span class="site-name">楪祈のBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">JDBC和连接池</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-03-02T04:43:24.000Z" title="发表于 2024-03-02 12:43:24">2024-03-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-03T06:32:16.137Z" title="更新于 2024-03-03 14:32:16">2024-03-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/java%E5%9F%BA%E7%A1%80/">java基础</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JDBC和连接池"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>​	JDBC是为访问不同数据库提供的统一接口，为使用者屏蔽了细节问题。可以利用JDBC连接任何提供了JDBC驱动程序的数据库系统，从而完成对数据库的各种操作。</p>
+<h2 id="数据库连接方式"><a href="#数据库连接方式" class="headerlink" title="数据库连接方式"></a>数据库连接方式</h2><p>连接数据库主要有2种方式</p>
+<ol>
+<li>使用Class.forName自动完成注册驱动，直接连接数据库：</li>
+</ol>
+<blockquote>
+<p>Class.forName(“com.mysql.cj.jdbc.Driver”);</p>
+<p>Connection connection &#x3D; DriverManager.getConnection(url, user, password);	&#x2F;&#x2F;其中的参数最好在使用时从文件中提取出来，方便修改</p>
+</blockquote>
+<ol start="2">
+<li>jdk1.5以后使用了jdbc4，不再需要显示调用Class.forName注册驱动，可以直接使用语句<code>Connection connection = DriverManager.getConnection(url, info);</code>连接数据库</li>
+</ol>
+<h2 id="在Java中输入SQL语句"><a href="#在Java中输入SQL语句" class="headerlink" title="在Java中输入SQL语句"></a>在Java中输入SQL语句</h2><p>在连接建立后，如果需要对数据库进行访问，执行命名或者SQL语句，可以通过Statement、<u>PreparedStatement</u>、CallableStatement，在开发中不会使用Statement，因为其存在SQL注入问题，一般使用PerparedStatement：</p>
+<ul>
+<li>PreparedStatement：执行的SQL语句中的参数用问号(?)来表示，调用相应的set方法来设置对应的参数。set方法有两个参数，第一个参数要设置SQL语句中的?的参数索引（从1开始），第二个是设置SQL语句中参数的值</li>
+</ul>
+<p>在使用DML语句时，直接使用String即可，在使用DQL语句时需要借助ResultSet获取结果：</p>
+<ul>
+<li>ResultSet：保持一个光标指向其当前的数据行。最初光标位于第一行之前。next方法可以将光标移动到下一行，并且在ResultSet对象中没有更多行时返回false，所以可以用while循环遍历结果集。</li>
+</ul>
+<h3 id="演示"><a href="#演示" class="headerlink" title="演示"></a>演示</h3><p>使用localhost的test数据库，登录root用户完成对emp表的增删改查。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Properties</span> <span class="variable">info</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();	<span class="comment">// 从Properties文件中获取数据</span></span><br><span class="line">        info.load(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;src\\mysql.properties&quot;</span>));</span><br><span class="line">        <span class="type">String</span> <span class="variable">driver</span> <span class="operator">=</span> info.getProperty(<span class="string">&quot;driver&quot;</span>);     <span class="comment">// com.mysql.cj.jdbc.Driver</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">user</span> <span class="operator">=</span> info.getProperty(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">password</span> <span class="operator">=</span> info.getProperty(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> info.getProperty(<span class="string">&quot;url&quot;</span>);           <span class="comment">// jdbc:mysql://localhost/test</span></span><br><span class="line">        Class.forName(driver);</span><br><span class="line">        <span class="type">String</span> <span class="variable">insert</span> <span class="operator">=</span> <span class="string">&quot;insert into emp values(null, &#x27;小明&#x27;, 18)&quot;</span>;	<span class="comment">// 增</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">update</span> <span class="operator">=</span> <span class="string">&quot;update emp set name=&#x27;小红&#x27; where id = 1&quot;</span>;	<span class="comment">// 改</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">select</span> <span class="operator">=</span> <span class="string">&quot;select id from emp where name=?&quot;</span>;		<span class="comment">// 查</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">drop</span> <span class="operator">=</span> <span class="string">&quot;delete from emp where id = 1&quot;</span>;		<span class="comment">// 删</span></span><br><span class="line">        <span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> DriverManager.getConnection(url, user, password);	<span class="comment">// 连接数据库</span></span><br><span class="line">        <span class="type">PreparedStatement</span> <span class="variable">preparedStatement</span> <span class="operator">=</span> connection.prepareStatement(select);</span><br><span class="line">        preparedStatement.executeUpdate(insert);</span><br><span class="line">        preparedStatement.executeUpdate(update);</span><br><span class="line">        preparedStatement.setString(<span class="number">1</span>, <span class="string">&quot;小明&quot;</span>);	<span class="comment">// 设置第一个问号处填写的值</span></span><br><span class="line">        <span class="type">ResultSet</span> <span class="variable">resultSet</span> <span class="operator">=</span> preparedStatement.executeQuery();	<span class="comment">// 使用ResultSet获取select的返回结果</span></span><br><span class="line">        <span class="keyword">while</span> (resultSet.next())&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">id</span> <span class="operator">=</span> resultSet.getInt(<span class="number">1</span>);</span><br><span class="line">            System.out.println(id);</span><br><span class="line">        &#125;</span><br><span class="line">        preparedStatement.executeUpdate(drop);</span><br><span class="line">        preparedStatement.close();		<span class="comment">// 关闭连接</span></span><br><span class="line">        resultSet.close();</span><br><span class="line">        connection.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JDBC处理事务"><a href="#JDBC处理事务" class="headerlink" title="JDBC处理事务"></a>JDBC处理事务</h3><p>使用<code>Connection connection = DriverManager.getConnection(url, user, password);</code>得到数据库连接之后，可以<code>connection.setAutoCommit(false)</code>设置事务不自动提交，然后在正常结束的逻辑后面使用<code>connection.commit()</code>提交事务，如果发生了异常，使用<code>connection.rollback()</code>回滚事务</p>
+<h3 id="批处理"><a href="#批处理" class="headerlink" title="批处理"></a>批处理</h3><p>当需要成批插入或者更新记录时，可以采用Java的批量更新机制，这一机制允许多条语句一次性提交给数据库批量处理。使用批处理功能时需要在url后面加入参数<code>?rewriteBatchedStatements=true</code>。批处理往往和PreparedStatement一起使用。</p>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ul>
+<li><p>addBatch():添加需要批量处理的SQL语句或参数</p>
+</li>
+<li><p>executeBatch():执行批量处理语句</p>
+</li>
+<li><p>clearBatch():清空批处理的语句</p>
+</li>
+</ul>
+<h2 id="连接池"><a href="#连接池" class="headerlink" title="连接池"></a>连接池</h2><h3 id="传统连接的问题"><a href="#传统连接的问题" class="headerlink" title="传统连接的问题"></a>传统连接的问题</h3><ul>
+<li>传统的JDBC数据库连接使用DriverManager获取，每次向数据库建立连接时都要将Connection加载到内存中，再验证IP地址，用户名和密码。频繁的进行数据库连接操作将占用很多的系统资源，容易造成服务器崩溃</li>
+<li>每一次数据库连接，使用完后都得断开，如果程序出现异常而未能关闭，将导致数据库内存泄漏，最终将导致数据库重启</li>
+<li>传统获取连接的方式，不能控制创建的连接数量，如连接过多，也可能导致内存泄漏，数据库崩溃。</li>
+<li>解决传统开发中的数据库连接问题,可以采用数据库连接池技术</li>
+</ul>
+<h3 id="连接池原理"><a href="#连接池原理" class="headerlink" title="连接池原理"></a>连接池原理</h3><ol>
+<li>预先在缓冲池中放入一定数量的连接，当需要建立数据库连接时，只需从中取出一个，使用完毕之后再放回去</li>
+<li>数据库连接池负责分配、管理和释放数据库连接，它允许应用程序重复使用一个现有的数据库连接，而不是重新建立一个</li>
+<li>当应用程序向连接池请求的连接数超过最大连接数量时，这些请求将被加入到等待队列中</li>
+</ol>
+<h3 id="连接池种类"><a href="#连接池种类" class="headerlink" title="连接池种类"></a>连接池种类</h3><ol>
+<li>JDBC的数据库连接池使用javax.sql.DataSource表示，DataSource是一个接口，通常由第三方提供实现</li>
+<li><u>C3P0</u>连接池，速度相对较慢，稳定性强(hibernate, spring底层使用该连接池)</li>
+<li>DBCP连接池，速度较快，不稳定</li>
+<li>Proxool数据库连接池，可以监控连接池状态，稳定性较差</li>
+<li>BoneCP数据库连接池，速度快</li>
+<li><u>Druid</u>(德鲁伊)是阿里提供的连接池，集DBCP、C3PO、Proxool优点于一身的数据库连接池</li>
+</ol>
+<h3 id="C3P0连接池"><a href="#C3P0连接池" class="headerlink" title="C3P0连接池"></a>C3P0连接池</h3><p>要使用C3P0连接池，首先要导入C3P0的jar包，并且把jar包当做library加入到项目中</p>
+<p>使用时：</p>
+<ol>
+<li>实例化<code>ComboPooledDataSource</code>数据源对象</li>
+<li>通过配置文件获取数据库相关信息</li>
+<li>通过方法给数据源设置相关参数<code>setDriverClass</code>、<code>setJdbcUrl</code>、<code>setUser</code>、<code>setPassword</code></li>
+<li>设置初始化连接数（连接池中一开始的连接数量）和最大连接数（最多能有多少连接）：<code>setInitialPoolSize(n)</code>、<code>setMaxPoolSize(n)</code></li>
+<li>拿到连接：<code>Connection connection = comboPooledDataSource.getConnection()</code></li>
+</ol>
+<h3 id="Druid连接池"><a href="#Druid连接池" class="headerlink" title="Druid连接池"></a>Druid连接池</h3><ol>
+<li>首先配置Properties文件，在文件中写明driver、url、user、password、initialSize、minIdle、maxActive、maxWait参数</li>
+<li>创建指定参数的数据库连接池<code>DataSource ds = DruidDataSourceFactory.createDataSource(properties)</code></li>
+<li>拿到连接：<code>Connection connection = ds.getConnection()</code></li>
+</ol>
+<h2 id="ApDBUtils"><a href="#ApDBUtils" class="headerlink" title="ApDBUtils"></a>ApDBUtils</h2><p>commons-dbutils是一个JDBC工具类库，可以极大简化jdbc编码的工作量。</p>
+<h3 id="DbUtils类"><a href="#DbUtils类" class="headerlink" title="DbUtils类"></a>DbUtils类</h3><ul>
+<li>QueryRunner类：封装了SQL的执行，可以实现增删改查和批处理操作，线程安全</li>
+<li>ResultSetHandler：用于出来ResultSet，按照数据要求转换成另一种形式<ul>
+<li>BeanHandler:将结果集中的第一行数据封装到一个对应的JavaBean实例中</li>
+<li>BeanListHandler:将结果集中的每一行数据都封装到一个对应的JavaBean实例中，存放到List里</li>
+<li>ScalarHandler:查询单行单列信息时，将该信息包装成一个Object对象返回</li>
+<li>update:执行增删改操作，返回受影响的行数</li>
+</ul>
+</li>
+</ul>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p>首先导入commons-dbutils.jar包，然后才能使用其提供的方法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Properties</span> <span class="variable">data</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">        data.load(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;src\\druid.properties&quot;</span>));	<span class="comment">// 从文件中读取driver、url、user、password</span></span><br><span class="line">        <span class="type">DataSource</span> <span class="variable">ds</span> <span class="operator">=</span> DruidDataSourceFactory.createDataSource(data);	<span class="comment">// 创建德鲁伊数据源对象</span></span><br><span class="line">        <span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> ds.getConnection();	·	<span class="comment">// 获取连接</span></span><br><span class="line">        <span class="type">QueryRunner</span> <span class="variable">queryRunner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">QueryRunner</span>();	</span><br><span class="line">        <span class="type">String</span> <span class="variable">select</span> <span class="operator">=</span> <span class="string">&quot;select * from emp where id &gt;= ?&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">update</span> <span class="operator">=</span> <span class="string">&quot;update emp set name = ? where id = ?&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">insert</span> <span class="operator">=</span> <span class="string">&quot;insert into emp values(null, ?, ?)&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">update</span> <span class="operator">=</span> <span class="string">&quot;delete from emp where id = ?&quot;</span>;</span><br><span class="line">        <span class="comment">// query执行sql语句，得到resultset并封装到ArrayList中，需要传入connection、sql语句、BeanListHandler对象, 最后的数字是给?赋值，可以有多个</span></span><br><span class="line">        List&lt;Actor&gt; list = queryRunner.query(connection, select, <span class="keyword">new</span> <span class="title class_">BeanListHandler</span>&lt;&gt;(Actor.class), <span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 执行DML语句使用update方法，传入连接，sql和需要赋值的?</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">rows</span> <span class="operator">=</span> queryRunner.update(connection, update, <span class="string">&quot;小明&quot;</span>, <span class="number">2</span>);</span><br><span class="line">        rows = queryRunner.update(connection, insert, <span class="string">&quot;小白&quot;</span>, <span class="number">21</span>);</span><br><span class="line">        rows = queryRunner.update(connection, drop, <span class="number">3</span>);</span><br><span class="line">        <span class="keyword">for</span>(Actor a: list)&#123;</span><br><span class="line">            System.out.println(a.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        connection.close();	<span class="comment">// 只需要关闭connection，resultset和perparedStatement由queryRunner自动关闭</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">楪舞飞祈</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/inori/78c36787.html">http://example.com/inori/78c36787.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">楪祈のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/java/">java</a></div><div class="post_share"><div class="social-share" data-image="https://api.suyanw.cn/api/comic3.php" data-sites="qq,wechat,twitter,weibo"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/inori/1761bce2.html" title="Java命名规范"><img class="cover" src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Java命名规范</div></div></a></div><div class="next-post pull-right"><a href="/inori/f4c950eb.html" title="MySQL进阶篇（上）"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MySQL进阶篇（上）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/inori/1761bce2.html" title="Java命名规范"><img class="cover" src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-06</div><div class="title">Java命名规范</div></div></a></div><div><a href="/inori/e29c8e30.html" title="java反射"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-23</div><div class="title">java反射</div></div></a></div><div><a href="/inori/bc47619b.html" title="java网络编程基础"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-21</div><div class="title">java网络编程基础</div></div></a></div><div><a href="/inori/47e3b155.html" title="javaIO流"><img class="cover" src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-09</div><div class="title">javaIO流</div></div></a></div><div><a href="/inori/9da8abfe.html" title="java多线程基础部分"><img class="cover" src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-07</div><div class="title">java多线程基础部分</div></div></a></div><div><a href="/inori/4b0d9081.html" title="java集合"><img class="cover" src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-04</div><div class="title">java集合</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">楪舞飞祈</div><div class="author-info__description">星座になれたら。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/inori-320"><i class="fab fa-github"></i><span>My GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:719471785@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p align="center" color="brown">多读书，多看报，少吃零食，多睡觉。</p></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">数据库连接方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8Java%E4%B8%AD%E8%BE%93%E5%85%A5SQL%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.</span> <span class="toc-text">在Java中输入SQL语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%94%E7%A4%BA"><span class="toc-number">2.1.</span> <span class="toc-text">演示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JDBC%E5%A4%84%E7%90%86%E4%BA%8B%E5%8A%A1"><span class="toc-number">2.2.</span> <span class="toc-text">JDBC处理事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%B9%E5%A4%84%E7%90%86"><span class="toc-number">2.3.</span> <span class="toc-text">批处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.3.1.</span> <span class="toc-text">方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="toc-number">3.</span> <span class="toc-text">连接池</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">3.1.</span> <span class="toc-text">传统连接的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%B1%A0%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.</span> <span class="toc-text">连接池原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%A7%8D%E7%B1%BB"><span class="toc-number">3.3.</span> <span class="toc-text">连接池种类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C3P0%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="toc-number">3.4.</span> <span class="toc-text">C3P0连接池</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Druid%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="toc-number">3.5.</span> <span class="toc-text">Druid连接池</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ApDBUtils"><span class="toc-number">4.</span> <span class="toc-text">ApDBUtils</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DbUtils%E7%B1%BB"><span class="toc-number">4.1.</span> <span class="toc-text">DbUtils类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%B3%95"><span class="toc-number">4.2.</span> <span class="toc-text">用法</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/inori/1761bce2.html" title="Java命名规范"><img src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java命名规范"/></a><div class="content"><a class="title" href="/inori/1761bce2.html" title="Java命名规范">Java命名规范</a><time datetime="2024-03-06T07:18:56.000Z" title="发表于 2024-03-06 15:18:56">2024-03-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/78c36787.html" title="JDBC和连接池"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JDBC和连接池"/></a><div class="content"><a class="title" href="/inori/78c36787.html" title="JDBC和连接池">JDBC和连接池</a><time datetime="2024-03-02T04:43:24.000Z" title="发表于 2024-03-02 12:43:24">2024-03-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/f4c950eb.html" title="MySQL进阶篇（上）"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL进阶篇（上）"/></a><div class="content"><a class="title" href="/inori/f4c950eb.html" title="MySQL进阶篇（上）">MySQL进阶篇（上）</a><time datetime="2024-02-29T07:53:08.000Z" title="发表于 2024-02-29 15:53:08">2024-02-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/337fcc87.html" title="MySQL基础篇"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL基础篇"/></a><div class="content"><a class="title" href="/inori/337fcc87.html" title="MySQL基础篇">MySQL基础篇</a><time datetime="2024-02-27T02:15:40.000Z" title="发表于 2024-02-27 10:15:40">2024-02-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/e29c8e30.html" title="java反射"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java反射"/></a><div class="content"><a class="title" href="/inori/e29c8e30.html" title="java反射">java反射</a><time datetime="2024-02-23T11:48:29.000Z" title="发表于 2024-02-23 19:48:29">2024-02-23</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://api.suyanw.cn/api/comic3.php')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 楪舞飞祈</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
