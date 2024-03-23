@@ -9,7 +9,7 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>星座になれたら。</description>
-    <pubDate>Sat, 23 Mar 2024 10:00:14 GMT</pubDate>
+    <pubDate>Sat, 23 Mar 2024 10:00:33 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -174,7 +174,7 @@
     </item>
     
     <item>
-      <title>java网络编程基础</title>
+      <title>Java网络编程基础</title>
       <link>http://example.com/inori/bc47619b.html</link>
       <guid>http://example.com/inori/bc47619b.html</guid>
       <pubDate>Wed, 21 Feb 2024 00:47:18 GMT</pubDate>
