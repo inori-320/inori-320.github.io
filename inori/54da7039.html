@@ -1,0 +1,319 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>机器学习基础知识 | 楪祈のBlog</title><meta name="author" content="楪舞飞祈"><meta name="copyright" content="楪舞飞祈"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="MachineLearning基础入门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习基础知识">
+<meta property="og:url" content="http://example.com/inori/54da7039.html">
+<meta property="og:site_name" content="楪祈のBlog">
+<meta property="og:description" content="MachineLearning基础入门">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgapi.xl0408.top/index.php">
+<meta property="article:published_time" content="2024-05-20T06:27:45.000Z">
+<meta property="article:modified_time" content="2024-05-21T10:49:55.222Z">
+<meta property="article:author" content="楪舞飞祈">
+<meta property="article:tag" content="MachineLearning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgapi.xl0408.top/index.php"><link rel="shortcut icon" href="/img/favicon_32.png"><link rel="canonical" href="http://example.com/inori/54da7039.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '机器学习基础知识',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-05-21 18:49:55'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/rss2.xml" title="楪祈のBlog" type="application/rss+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://imgapi.xl0408.top/index.php')"><nav id="nav"><span id="blog-info"><a href="/" title="楪祈のBlog"><span class="site-name">楪祈のBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">机器学习基础知识</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-20T06:27:45.000Z" title="发表于 2024-05-20 14:27:45">2024-05-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-05-21T10:49:55.222Z" title="更新于 2024-05-21 18:49:55">2024-05-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/MachineLearning/">MachineLearning</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="机器学习基础知识"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>机器学习是人工智能的重要技术基础，涉及的内容十分广泛。由于我是以发强化学习方向论文为导向，所以机器学习部分知识点不做深入学习，了解为主，本文主要涵盖机器学习入门的基础知识。</p>
+<p>机器学习的核心元素：<strong>数据、模型、算法</strong></p>
+<p>机器学习工作流程一般为数据预处理（Processing）、模型学习（Learning）、模型评估（Evaluation）、新样本预测（Prediction）几个步骤</p>
+<p><strong>数据预处理：</strong>输入（未处理的数据 + 标签）-&gt; 处理过程 -&gt;（特征处理+幅度缩放、特征选择、维度约减、采样）-&gt; 输出（测试集 + 训练集）</p>
+<p><strong>模型学习：</strong>模型选择、交叉验证、结果评估、超参选择。</p>
+<p><strong>模型评估：</strong>了解模型对于数据集测试的得分。</p>
+<p><strong>新样本预测：</strong>预测测试集</p>
+<h1 id="基本名词"><a href="#基本名词" class="headerlink" title="基本名词"></a>基本名词</h1><p><strong>示例&#x2F;样本：</strong>一条数据集中的一条数据</p>
+<p><strong>属性&#x2F;特征：</strong>判断样本好坏的根据，如「色泽」「根蒂」</p>
+<p><strong>属性空间&#x2F;样本空间&#x2F;输入空间X：</strong>由全部属性张成的空间</p>
+<p><strong>特征向量：</strong>空间中每个点对应的一个坐标向量</p>
+<p><strong>标记：</strong>关于示例结果的信息，如（（色泽&#x3D;青绿，根蒂&#x3D;蜷缩，敲声&#x3D;浊响），好瓜），其中「好瓜」称为标记</p>
+<p><strong>分类：</strong>若要预测的是离散值，如「好瓜」，「坏瓜」，此类学习任务称为分类</p>
+<p><strong>假设：</strong>学得模型对应了关于数据的某种潜在规律</p>
+<p><strong>真相：</strong>潜在规律自身</p>
+<p><strong>学习过程：</strong>是为了找出或逼近真相</p>
+<p><strong>泛化能力：</strong>学得模型适用于新样本的能力。一般来说，训练样本越大，越有可能通过学习来获得具有强泛化能力的模型</p>
+<p><strong>训练集</strong>：帮助训练模型，简单的说就是通过训练集的数据让确定拟合曲线的参数</p>
+<p><strong>测试集</strong>：为了测试已经训练好的模型的精确度</p>
+<p><strong>过拟合</strong>：模型在训练集上表现的很好，但是在交叉验证集合测试集上表现一般，也就是说模型对未知样本的预测表现一般，泛化能力较差</p>
+<p><strong>经验误差</strong>：模型在训练集上的误差称为「经验误差」（Empirical Error），经验误差并不是越小越好，因为我们希望在新的没有见过的数据上，也能有好的预估结果</p>
+<p><strong>偏差</strong>：模型拟合的偏差程度。给定无数套训练集而期望拟合出来的模型就是平均模型，偏差就是真实模型和平均模型的差异</p>
+<p><strong>二分类</strong>：类别中只有两个类，是 or 否，且只有一个类别，即一个label为0或者1</p>
+<h1 id="算法分类"><a href="#算法分类" class="headerlink" title="算法分类"></a>算法分类</h1><p>机器学习算法有：监督学习，无监督学习，半监督学习，强化学习</p>
+<h2 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h2><p>监督学习是从标记的训练数据中学习并建立模型，然后基于该模型预测未知的样本。其中，模型的输入是某个样本数据的特征，而函数的输出是与该样本相对应的标签。</p>
+<p>常见的监督学习算法：回归分析、分类预测</p>
+<ul>
+<li>回归分析：线性回归，决策树，随机森林等</li>
+<li>分类预测：逻辑回归，KNN，支持向量机，朴素贝叶斯等</li>
+</ul>
+<h3 id="KNN算法"><a href="#KNN算法" class="headerlink" title="KNN算法"></a>KNN算法</h3><p>KNN算法即K最近邻近算法。所谓K最近邻，就是k个最近的邻居的意思，说的是每个样本都可以用它最接近的k个邻居来代表。KNN的输入基于实例的学习（instance-based learning），没有显式的学习过程，也就是说没有训练阶段，数据集事先已有了分类和特征值，待收到新样本后直接进行处理，<strong>KNN通过测量不同特征值之间的距离进行分类</strong></p>
+<p>思路：如果一个样本在特征空间中的k个最邻近的样本中的大多数属于某一个类别，则该样本也划分为这个类别。KNN算法中，所选择的邻居都是已经正确分类的对象。该方法在定类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别</p>
+<h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><ol>
+<li>计算测试数据与各个训练数据之间的距离</li>
+<li>按照距离的递增关系进行排序</li>
+<li>选取距离最小的K个点</li>
+<li>确定前K个点所在类别的出现频率</li>
+<li>返回前K个点中出现频率最高的类别作为测试数据的预测分类</li>
+</ol>
+<h4 id="K的取值"><a href="#K的取值" class="headerlink" title="K的取值"></a>K的取值</h4><p>K：临近数，即在预测目标点时取几个临近的点来预测。</p>
+<p>K值得选取非常重要：</p>
+<ul>
+<li>如果K的取值过小，一旦有噪声存在将会对预测产生比较大影响，例如取K值为1时，一旦最近的一个点是噪声，那么就会出现偏差</li>
+<li>如果K的取值过大，就相当于用较大邻域中的训练实例进行预测，学习的近似误差会增大。这时与输入目标点较远实例也会对预测起作用，使预测发生错误</li>
+</ul>
+<p>K的取值尽量要取<strong>奇数</strong>，以保证在计算结果最后会产生一个较多的类别，如果取偶数可能会产生相等的情况，不利于预测。</p>
+<p>常用的方法是从k&#x3D;1开始，使用检验集估计分类器的误差率。重复该过程，每次K增值1，允许增加一个近邻。选取产生最小误差率的K。一般k的取值不超过20，上限是n的开方，随着数据集的增大，K的值也要增大</p>
+<h3 id="朴素贝叶斯算法"><a href="#朴素贝叶斯算法" class="headerlink" title="朴素贝叶斯算法"></a>朴素贝叶斯算法</h3><p>朴素贝叶斯算法是一种基于概率论和统计学的算法。它的核心思想是概率，通过计算条件概率来预测或分类数据</p>
+<h4 id="贝叶斯定理"><a href="#贝叶斯定理" class="headerlink" title="贝叶斯定理"></a>贝叶斯定理</h4><p>贝叶斯定理是朴素贝叶斯算法的核心，它是一个概率公式，用于计算一个事件的后验概率。根据贝叶斯定理，事件 A 的后验概率等于先验概率 P(A)，与另一个事件 B 发生的联合概率 P(B|A) 乘以一个正则因子，即：<br>$$<br>P(Y|X) &#x3D; \frac{P(X|Y)P(Y)}{P(X)}<br>（X：特征向量， Y：类别）<br>$$<br>**先验概率P(X)**：先验概率是指根据以往经验和分析得到的概率</p>
+<p>**后验概率P(Y|X)**：事情已经发生，要求这件事情发生的原因是由某个因素引起的可能性的大小，后验分布P(Y|X)表示事件X已经发生的前提下，事件Y发生的概率，叫做事件X发生下事件Y的条件概率</p>
+<p>**后验概率P(X|Y)**：在已知Y发生后X的条件概率，也由于知道Y的取值而被称为X的后验概率</p>
+<h4 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h4><p>朴素贝叶斯算法是假设各个特征之间相互独立，也是朴素这词的意思，那么贝叶斯公式中的P(X|Y)可写成：<br>$$<br>P(X|Y)&#x3D;P(x_1|Y)P(x_2|Y)…P(x_n|Y)<br>$$<br>即朴素贝叶斯公式：<br>$$<br>P(Y|X) &#x3D; \frac{P(x_1|Y)P(x_2|Y)…P(x_n|Y)P(Y)}{P(X)}<br>$$</p>
+<h4 id="贝叶斯算法"><a href="#贝叶斯算法" class="headerlink" title="贝叶斯算法"></a>贝叶斯算法</h4><p>贝叶斯方法源于决一个“逆概”问题：</p>
+<p><strong>正向概率</strong>：假设袋子里面有N个白球，M个黑球，伸手进去摸一把，摸出黑球的概率是多大</p>
+<p><strong>逆向概率</strong>：如果事先不知道袋子里面黑白球的比例，而是闭着眼睛摸出一个（或者几个）球，观察这些取出来的球的颜色之后，那么可以就此对袋子里面的黑白球的比例做出什么样的推测</p>
+<p>什么是贝叶斯？</p>
+<ul>
+<li>现实世界本身就是不确定的，人类的观察能力是有局限性的</li>
+<li>我们日常观察到的只是事物表明上的结果，因此我们需要提供一个猜测</li>
+</ul>
+<p>朴素贝叶斯算法的朴素：特征条件独立；贝叶斯：基于贝叶斯定理。属于监督学习的生成模型，实现监督，没有迭代，并有坚实的数学理论（即贝叶斯定理）作为支撑。在大量样本下会有较好的表现，不适用于输入向量的特征条件有关联的场景</p>
+<p>朴素贝叶斯会单独考量每一维独立特征被分类的条件概率，进而综合这些概率并对其所在的特征向量做出分类预测。因此，朴素贝叶斯的基本数据假设是：各个维度上的特征被分类的条件概率之间是相互独立的。它经常被用于文本分类中，包括互联网新闻的分类，垃圾邮件的筛选</p>
+<p>朴素贝叶斯的思想：对于给出的待分类项，求解在此项出现的条件下各个类别出现的概率，哪个最大，即认为此待分类项属于哪个类别</p>
+<h3 id="决策树算法"><a href="#决策树算法" class="headerlink" title="决策树算法"></a>决策树算法</h3><p>决策树算法是一种逼近离散函数值的方法。它是一种典型的分类方法，首先对数据进行处理，利用归纳算法生成可读的规则和决策树，然后使用决策对新数据进行分析。本质上决策树是通过一系列规则对数据进行分类的过程，适用于类别和连续输入（特征）和输出（预测）变量。基于树的方法把特征空间划分成一系列矩形，然后给每一个矩形安置一个简单的模型（像一个常数）</p>
+<p>决策树构造可以分两步进行：</p>
+<ol>
+<li>生成：由训练样本集生成决策树的过程。一般情况下，训练样本数据集是根据实际需要有历史的、有一定综合程度的，用于数据分析处理的数据集</li>
+<li>剪枝：对上一阶段生成的决策树进行检验和校正，主要是用新的样本数据集（测试数据集）中的数据校验决策树生成过程中产生的初步规则，将那些影响预衡准确性的分枝剪除</li>
+</ol>
+<p>决策树学习的算法通常是一个递归地决策树学习的算法通常是一个递归地选择最优特征，并根据该特征对训练数据进行分割，使得对各个子数据集有一个最好的分类的过程。包含特征选择、决策树的生成和决策树的剪枝过程。选择最优特征，并根据该特征对训练数据进行分割，使得对各个子数据集有一个最好的分类的过程。包含特征选择、决策树的生成和决策树的剪枝过程。</p>
+<p><strong>剪枝：</strong>将树变得更简单，从而使它具有更好的泛化能力。</p>
+<p>步骤：去掉过于细分的叶结点，使其回退到父结点，甚至更高的结点，然后将父结点或更高的结点改为新的叶结点。</p>
+<p>决策树的生成对应模型的局部选择，决策树的剪枝对应于模型的全局选择。决策树的生成只考虑局部最优，决策树的剪枝则考虑全局最优。</p>
+<p><strong>特征选择：</strong>如果特征数量很多，在决策树学习开始时对特征进行选择，只留下对训练数据有足够分类能力的特征</p>
+<h4 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h4><ol>
+<li>树以代表训练样本的单个结点开始</li>
+<li>如果样本都在同一类．则该结点成为树叶，并用该类标记</li>
+<li>否则，算法选择最有分类能力的属性作为决策树的当前结点</li>
+<li>根据当前决策结点属性取值的不同，将训练样本数据集分为若干子集，每个取值形成一个分枝，有几个取值形成几个分枝。针对上一步得到的一个子集，重复进行先前步骤，递归形成每个划分样本上的决策树。一旦一个属性出现在一个结点上，就不必在该结点的任何后代考虑它</li>
+<li>递归划分步骤仅当下列条件之一成立时停止：<ul>
+<li>给定结点的所有样本属于同一类</li>
+<li>没有剩余属性可以用来进一步划分样本．在这种情况下．使用多数表决，将给定的结点转换成树叶，并以样本中元组个数最多的类别作为类别标记，同时也可以存放该结点样本的类别分布</li>
+<li>如果某一分枝tc，没有满足该分支中已有分类的样本，则以样本的多数类创建一个树叶</li>
+</ul>
+</li>
+</ol>
+<h3 id="SVM算法"><a href="#SVM算法" class="headerlink" title="SVM算法"></a>SVM算法</h3><p>SVM即支持向量机（support vector machine，SVM），支持向量机是一种二分类模型，其基本模型定义为特征空间上的间隔最大的线性分类器，其学习策略便是间隔最大化，最终可转化为一个凸二次规划问题的求解。支持向量机的学习算法是求解凸二次规划的最优化算法。基础的SVM算法是一个二分类算法，至于多分类任务，可以通过多次使用SVM进行解决</p>
+<h4 id="线性可分"><a href="#线性可分" class="headerlink" title="线性可分"></a>线性可分</h4><p>对于一个数据集合可以画一条直线将两组数据点分开，这样的数据成为线性可分（linearly separable）</p>
+<p><img src="/img/loading.gif" data-original="D:\Blog\source\img\smv_linearly_separable.png" alt="smv_linearly_separable"></p>
+<ul>
+<li>分割超平面：将上述数据集分隔开来的直线成为分隔超平面。对于二维平面来说，分隔超平面就是一条直线。对于三维及三维以上的数据来说，分隔数据的是个平面，称为超平面，也就是分类的决策边界</li>
+<li>间隔：点到分割面的距离，称为点相对于分割面的间隔。数据集所有点到分隔面的最小间隔的2倍，称为分类器或数据集的间隔。论文中提到的间隔多指这个间隔。SVM分类器就是要找最大的数据集间隔</li>
+<li>支持向量：离分隔超平面最近的那些点</li>
+</ul>
+<p>SVM所做的工作就是找这样的超平面，能够将两个不同类别的样本划分开来，但是这种平面是不唯一的，即可能存在无数个超平面都可以将两种样本分开，那么我们如何才能确定一个分类效果最好的超平面呢？<br>对每一种可能的超平面，我们将它进行平移，直到它与空间中的样本向量相交。我们称这两个向量为支持向量，之后我们计算支持向量到该超平面的距离d，分类效果最好的超平面应该使d最大</p>
+<p>支持向量机的核心思想：最大间隔化，最不受到噪声的干扰</p>
+<h4 id="优缺点及应用场景"><a href="#优缺点及应用场景" class="headerlink" title="优缺点及应用场景"></a>优缺点及应用场景</h4><ol>
+<li>SVM的优点：</li>
+</ol>
+<ul>
+<li>高效的处理高维特征空间：SVM通过将数据映射到高维空间中，可以处理高维特征，并在低维空间中进行计算，从而有效地处理高维数据</li>
+<li>适用于小样本数据集：SVM是一种基于边界的算法，它依赖于少数支持向量，因此对于小样本数据集具有较好的泛化能力</li>
+<li>可以处理非线性问题：SVM使用核函数将输入数据映射到高维空间，从而可以解决非线性问题。常用的核函数包括线性核、多项式核和径向基函数（RBF）核</li>
+<li>避免局部最优解：SVM的优化目标是最大化间隔，而不是仅仅最小化误分类点。这使得SVM在解决复杂问题时能够避免陷入局部最优解</li>
+<li>对于噪声数据的鲁棒性：SVM通过使用支持向量来定义决策边界，这使得它对于噪声数据具有一定的鲁棒性</li>
+</ul>
+<ol start="2">
+<li>SVM的缺点：</li>
+</ol>
+<ul>
+<li>对大规模数据集的计算开销较大：SVM的计算复杂度随着样本数量的增加而增加，特别是在大规模数据集上的训练时间较长</li>
+<li>对于非线性问题选择合适的核函数和参数较为困难：在处理非线性问题时，选择适当的核函数和相应的参数需要一定的经验和领域知识</li>
+<li>对缺失数据敏感：SVM在处理含有缺失数据的情况下表现不佳，因为它依赖于支持向量的定义</li>
+<li>难以解释模型结果：SVM生成的模型通常是黑盒模型，难以直观地解释模型的决策过程和结果</li>
+</ul>
+<ol start="3">
+<li>SVM主要应用场景：</li>
+</ol>
+<ul>
+<li>文本分类：如垃圾邮件分类、情感分析和文档分类等</li>
+<li>图像识别：可用于图像分类、目标识别和人脸识别等任务。它可以通过提取图像的特征向量，并将其作为输入来训练SVM模型</li>
+<li>金融领域：可用于信用评分、风险评估和股票市场预测等金融任务</li>
+<li>医学诊断：可以应用于医学图像分析，如疾病检测、癌症诊断和医学影像分类等</li>
+<li>视频分类：可以用于视频分类、行为识别和运动检测等任务，通过提取视频帧的特征并将其输入SVM模型进行分类</li>
+<li>推荐系统：可以用于个性化推荐和用户分类等推荐系统任务，通过分析用户行为和特征来预测用户的兴趣和偏好</li>
+</ul>
+<h3 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h3><p>逻辑回归虽然名字中带有回归，其实是分类模型，主要用于二分类问题，通过给定的n组数据（训练集）来训练模型，并在训练结束后对给定的一组或多组数据（测试集）进行分类。其中每一组数据都是由p个指标构成。</p>
+<p>由于二分类问题分成两类，可以让其中一类标签为0，另一类为1。我们需要一个函数，对于输入的每一组数据，都能映射成0~1之间的数。并且如果函数值大于0.5，就判定属于1，否则属于0。而且函数中需要待定参数，通过利用样本训练，使得这个参数能够对训练集中的数据有很准确的预测。</p>
+<h4 id="形式"><a href="#形式" class="headerlink" title="形式"></a>形式</h4><p>逻辑回归的模型包含两个模块：线性部分和激活函数</p>
+<p>线性部分的数学模型写为<code>h(x)=wx+b</code>，x表示样本的输入特征向量，w是权重，b是偏置</p>
+<p>激活函数是sigmoid函数：<br>$$<br>\sigma(h(x))&#x3D; \frac{1}{1+e^{−h(x)}}<br>&#x3D; \frac{1}{1+e^{−(wx+b)}}<br>$$</p>
+<p>这个函数的曲线是一条值域为(0,1)的曲线，当输入值趋近于无穷大时，输出结果会趋近于1，输入值趋近于无穷小时，输出结果会趋近于-1</p>
+<p>逻辑回归不仅是一个二分类模型，也是一个线性分类模型，h(x)作为决策函数，通过判断样本落在决策函数的哪一边，区分出不同的类别</p>
+<h2 id="无监督学习"><a href="#无监督学习" class="headerlink" title="无监督学习"></a>无监督学习</h2><p>该类算法的输入样本不需要标记，而是自动地从样本中学习这种特征以实现预测。</p>
+<p>常见的非监督学习算法：聚类和降维</p>
+<ul>
+<li>聚类：Kmeans、Apriori、DBSCAN等</li>
+<li>降维：主成分分析(PCA)等</li>
+</ul>
+<h3 id="Kmeans算法"><a href="#Kmeans算法" class="headerlink" title="Kmeans算法"></a>Kmeans算法</h3><p>k均值聚类算法（k-means）是一种迭代求解的聚类分析算法，其步骤是，预将数据分为K组，则随机选取K个对象作为初始的聚类中心，然后计算每个对象与各个种子聚类中心之间的距离，把每个对象分配给距离它最近的聚类中心。聚类中心以及分配给它们的对象就代表一个聚类。每分配一个样本，聚类的聚类中心会根据聚类中现有的对象被重新计算。这个过程将不断重复直到满足某个终止条件。终止条件可以是没有（或最小数目）对象被重新分配给不同的聚类，没有（或最小数目）聚类中心再发生变化，误差平方和局部最小。</p>
+<h4 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h4><ol>
+<li>从N个数据文档（样本）随机选取K个数据文档作为质心（聚类中心）。</li>
+<li>对每个数据文档测量其到每个质心的距离，并把它归到最近的质心的类。</li>
+<li>重新计算已经得到的各个类的质心。</li>
+<li>迭代2~3步直至新的质心与原质心相等或小于指定阈值，算法结束。 本文采用所有样本所属的质心都不再变化时，算法收敛。</li>
+</ol>
+<h1 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h1><p>每一个样本经过模型后会得到一个预测值，然后得到的预测值和真实值的差值就成为损失（损失值越小证明模型越成功），有许多不同种类的损失函数，这些函数<strong>本质上就是计算预测值和真实值的差距的一类型函数</strong>，经过库的封装形成了有具体名字的函数</p>
+<p>输入的feature（或称为x）需要通过模型（model）预测出y，此过程称为向前传播（forward pass），而要将预测与真实值的差值减小需要更新模型中的参数，这个过程称为向后传播（backward pass），其中损失函数（lossfunction）就基于这两种传播之间，起到一种有点像<strong>承上启下</strong>的作用，<strong>承上指：接収模型的预测值，启下指：计算预测值和真实值的差值，为下面反向传播提供输入数据</strong></p>
+<p>常用的损失函数有：均方误差(MSE)、平均绝对误差(MAE)、均方根误差(RMSE)、平均偏差误差(MBE)、Huber损失、最大似然损失(Likelihood Loss&#x2F;LHL)、二元交叉熵（BCE）、交叉熵（CE）、Kullback-Leibler 散度 (KLD)等</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">楪舞飞祈</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/inori/54da7039.html">http://example.com/inori/54da7039.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">楪祈のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MachineLearning/">MachineLearning</a></div><div class="post_share"><div class="social-share" data-image="https://imgapi.xl0408.top/index.php" data-sites="qq,wechat,twitter,weibo"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/inori/e0d16fd2.html" title="numpy常用api"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">numpy常用api</div></div></a></div><div class="next-post pull-right"><a href="/inori/592cf81.html" title="MySQL运维篇"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MySQL运维篇</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">楪舞飞祈</div><div class="author-info__description">星座になれたら。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/inori-320"><i class="fab fa-github"></i><span>My GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:719471785@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p align="center" color="brown">多读书，多看报，少吃零食，多睡觉。</p></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%90%8D%E8%AF%8D"><span class="toc-number">1.</span> <span class="toc-text">基本名词</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text">算法分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.1.</span> <span class="toc-text">监督学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#KNN%E7%AE%97%E6%B3%95"><span class="toc-number">2.1.1.</span> <span class="toc-text">KNN算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">算法流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#K%E7%9A%84%E5%8F%96%E5%80%BC"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">K的取值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95"><span class="toc-number">2.1.2.</span> <span class="toc-text">朴素贝叶斯算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">贝叶斯定理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">朴素贝叶斯</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95"><span class="toc-number">2.1.2.3.</span> <span class="toc-text">贝叶斯算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91%E7%AE%97%E6%B3%95"><span class="toc-number">2.1.3.</span> <span class="toc-text">决策树算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">基本思想</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SVM%E7%AE%97%E6%B3%95"><span class="toc-number">2.1.4.</span> <span class="toc-text">SVM算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%8F%AF%E5%88%86"><span class="toc-number">2.1.4.1.</span> <span class="toc-text">线性可分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">2.1.4.2.</span> <span class="toc-text">优缺点及应用场景</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92"><span class="toc-number">2.1.5.</span> <span class="toc-text">逻辑回归</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%A2%E5%BC%8F"><span class="toc-number">2.1.5.1.</span> <span class="toc-text">形式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.2.</span> <span class="toc-text">无监督学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Kmeans%E7%AE%97%E6%B3%95"><span class="toc-number">2.2.1.</span> <span class="toc-text">Kmeans算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">算法步骤</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">损失函数</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/inori/8f832495.html" title="pytorch基础入门"><img src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pytorch基础入门"/></a><div class="content"><a class="title" href="/inori/8f832495.html" title="pytorch基础入门">pytorch基础入门</a><time datetime="2024-05-23T08:30:34.000Z" title="发表于 2024-05-23 16:30:34">2024-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/e0d16fd2.html" title="numpy常用api"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="numpy常用api"/></a><div class="content"><a class="title" href="/inori/e0d16fd2.html" title="numpy常用api">numpy常用api</a><time datetime="2024-05-21T11:18:34.000Z" title="发表于 2024-05-21 19:18:34">2024-05-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/54da7039.html" title="机器学习基础知识"><img src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="机器学习基础知识"/></a><div class="content"><a class="title" href="/inori/54da7039.html" title="机器学习基础知识">机器学习基础知识</a><time datetime="2024-05-20T06:27:45.000Z" title="发表于 2024-05-20 14:27:45">2024-05-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/592cf81.html" title="MySQL运维篇"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL运维篇"/></a><div class="content"><a class="title" href="/inori/592cf81.html" title="MySQL运维篇">MySQL运维篇</a><time datetime="2024-05-17T09:45:32.000Z" title="发表于 2024-05-17 17:45:32">2024-05-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/65068962.html" title="ElasticSearch基础入门(二)"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ElasticSearch基础入门(二)"/></a><div class="content"><a class="title" href="/inori/65068962.html" title="ElasticSearch基础入门(二)">ElasticSearch基础入门(二)</a><time datetime="2024-05-12T13:30:40.000Z" title="发表于 2024-05-12 21:30:40">2024-05-12</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://imgapi.xl0408.top/index.php')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 楪舞飞祈</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
