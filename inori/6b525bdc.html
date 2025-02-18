@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>二分查找算法入门 | 楪祈のBlog</title><meta name="author" content="楪舞飞祈"><meta name="copyright" content="楪舞飞祈"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="算法入门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二分查找算法入门">
+<meta property="og:url" content="http://example.com/inori/6b525bdc.html">
+<meta property="og:site_name" content="楪祈のBlog">
+<meta property="og:description" content="算法入门">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://api.suyanw.cn/api/comic3.php">
+<meta property="article:published_time" content="2025-02-17T06:59:22.000Z">
+<meta property="article:modified_time" content="2025-02-18T07:46:23.787Z">
+<meta property="article:author" content="楪舞飞祈">
+<meta property="article:tag" content="Algorithms">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://api.suyanw.cn/api/comic3.php"><link rel="shortcut icon" href="/img/favicon_32.png"><link rel="canonical" href="http://example.com/inori/6b525bdc.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '二分查找算法入门',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2025-02-18 15:46:23'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/rss2.xml" title="楪祈のBlog" type="application/rss+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.suyanw.cn/api/comic3.php')"><nav id="nav"><span id="blog-info"><a href="/" title="楪祈のBlog"><span class="site-name">楪祈のBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">二分查找算法入门</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-17T06:59:22.000Z" title="发表于 2025-02-17 14:59:22">2025-02-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-18T07:46:23.787Z" title="更新于 2025-02-18 15:46:23">2025-02-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Algorithms/">Algorithms</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="二分查找算法入门"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>二分查找可以有几种写法：</p>
+<ul>
+<li>闭区间</li>
+<li>开区间</li>
+<li>半开半闭区间（左开右闭&#x2F;左闭右开）</li>
+</ul>
+<p>所谓开闭区间，指的是二分查找中的<code>left</code>和<code>right</code>的值，如果取值在数组内部（大部分情况下），就可以成为闭区间，反之为开区间。</p>
+<p>展示这三种写法，我们从一道<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/description/">题目</a>开始：</p>
+<hr>
+
+<p>给定一个 <code>n</code> 个元素有序的（升序）整型数组 <code>nums</code> 和一个目标值 <code>target</code> ，写一个函数搜索 <code>nums</code> 中的 <code>target</code>，如果目标值存在返回下标，否则返回 <code>-1</code>。</p>
+<hr>
+
+<p>这道题就是纯粹的二分查找板子题，数组有序，数组中无重复元素。</p>
+<p>这里使用<code>Java</code>进行展示，首先是<code>闭区间</code>写法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">0</span>, r = n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(l &lt;= r)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> l + (r - l &gt;&gt; <span class="number">1</span>);	<span class="comment">// 防止爆int</span></span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; target) l = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums[l] == target ? l : -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于全程需要<code>left</code>和<code>right</code>处于闭区间内，所以更新后的取值一定是<code>mid+1</code>或<code>mid-1</code>。<code>left=right</code>时，<code>mid</code>也等于<code>right</code>，会陷入死循环，所以要在边界条件的判断中加入<code>=</code>，即<code>while(l &lt;= r)</code>，最后<code>right+1</code>也就是<code>left</code>为所求答案。</p>
+<p>然后是<code>半开半闭</code>区间：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">0</span>, r = n;	<span class="comment">// 左闭右开</span></span><br><span class="line">        <span class="keyword">while</span>(l &lt; r)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> l + (r - l &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; target) l = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> r = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums[l] == target ? l : -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>半开半闭写法中，谁是开区间，谁更新后就要等于<code>mid</code>。结束时<code>left=right</code>，两者返回其一即可。</p>
+<p>最后是<code>开区间</code>写法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> -<span class="number">1</span>, r = n;</span><br><span class="line">        <span class="keyword">while</span>(l + <span class="number">1</span> &lt; r)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> l + (r - l &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; target) l = mid;</span><br><span class="line">            <span class="keyword">else</span> r = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(r == n) <span class="keyword">return</span> -<span class="number">1</span>;	<span class="comment">// 由于是开区间，r有可能等于nums.length，所以要特判</span></span><br><span class="line">        <span class="keyword">return</span> nums[r] == target ? r : -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>三种写法只有代码上的区别，最后答案都是一样的，选一个顺眼的写法就好。</p>
+<p>我们来做几道扩展题，提升对二分查找的熟练度：</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/">在排序数组中查找元素的第一个和最后一个位置</a></p>
+<hr>
+
+<p>给你一个按照非递减顺序排列的整数数组 <code>nums</code>，和一个目标值 <code>target</code>。请你找出给定目标值在数组中的开始位置和结束位置。</p>
+<p>如果数组中不存在目标值 <code>target</code>，返回 <code>[-1, -1]</code>。</p>
+<p>你必须设计并实现时间复杂度为 <code>O(log n)</code> 的算法解决此问题。</p>
+<hr>
+
+<p>这道题要求我们在数组中找到一段等于<code>target</code>的子数组，返回其起点和终点的下标，如果没有返回<code>[-1, -1]</code>。</p>
+<p>起始位置很好找，套用二分模板即可。</p>
+<p>终点如何找呢？</p>
+<p>这就要讨论不同的要求了</p>
+<ul>
+<li>如果要求我们寻找<code>&gt;= x</code>时，就直接使用二分模板</li>
+<li>如果要求我们寻找<code>&gt; x</code>时，可以将题目转化为<code>&gt;= x+1</code></li>
+<li>如果要求我们寻找<code>&lt; x</code>时，可以将题目转化为<code>(&gt;= x) - 1</code></li>
+<li>如果要求我们寻找<code>&lt;= x</code>某个值时，可以将题目转化为<code>(&gt; x) - 1</code> -》 <code>(&gt;= x + 1) - 1</code></li>
+</ul>
+<p>要寻找终点，也就是<code>&gt; x</code>的情况。</p>
+<p>题解代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    private int[] nums;</span><br><span class="line"></span><br><span class="line">    private int lowerBound(int target) &#123;</span><br><span class="line">        int l = 0, r = nums.length - 1;</span><br><span class="line">        while(l &lt;= r)&#123;</span><br><span class="line">            int mid = l + ((r - l) &gt;&gt; 1);</span><br><span class="line">            if(nums[mid] &lt; target) l = mid + 1;</span><br><span class="line">            else r = mid - 1;</span><br><span class="line">        &#125;</span><br><span class="line">        return l;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int[] searchRange(int[] nums, int target) &#123;</span><br><span class="line">        this.nums = nums;</span><br><span class="line">        int start = lowerBound(target);</span><br><span class="line">        if(start == nums.length || nums[start] != target) return new int[]&#123;-1, -1&#125;;</span><br><span class="line">        int end = lowerBound(target + 1) - 1;</span><br><span class="line">        return new int[]&#123;start, end&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>二分不止能用在有序数组中，也能用在部分有序的数组中。</p>
+<p>比如<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-peak-element/solution/by-endlesscheng-9ass/">寻找峰值</a>：</p>
+<hr>
+
+<p>峰值元素是指其值严格大于左右相邻值的元素。</p>
+<p>给你一个整数数组 <code>nums</code>，找到峰值元素并返回其索引。数组可能包含多个峰值，在这种情况下，返回 <strong>任何一个峰值</strong> 所在位置即可。</p>
+<p>你可以假设 <code>nums[-1] = nums[n] = -∞</code> 。</p>
+<p>你必须实现时间复杂度为 <code>O(log n)</code> 的算法来解决此问题。</p>
+<hr>
+这道题给定的数组是由很多部分有序的数组组成的，峰值可能有多个，我们只需要找到其中一个即可。
+
+<p>这道题为什么能够使用二分查找呢？</p>
+<p>因为我们要找到一个峰值，而峰值是一定比周围两个值高的（如果是边界则为一个值），这里可以使用二分查找来逐渐逼近这个点。</p>
+<p>由于要找峰值，<code>target</code>的选择可以是<code>nums[mid+1]</code>或<code>nums[mid-1]</code>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">findPeakElement</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">0</span>, r = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(l &lt;= r)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> l + ((r - l) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(mid + <span class="number">1</span> == nums.length) <span class="keyword">return</span> mid;	<span class="comment">// 特殊判断，防止越界</span></span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; nums[mid + <span class="number">1</span>]) l = mid + <span class="number">1</span>;	<span class="comment">// 如果mid的下一个比mid大，则峰值一定在mid后面，更新l</span></span><br><span class="line">            <span class="keyword">else</span> r = mid - <span class="number">1</span>; 	<span class="comment">// 反之更新r</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后是<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-in-rotated-sorted-array/">搜索旋转排序数组</a></p>
+<hr>
+
+<p>整数数组 <code>nums</code> 按升序排列，数组中的值 <strong>互不相同</strong> 。</p>
+<p>在传递给函数之前，<code>nums</code> 在预先未知的某个下标 <code>k</code>（<code>0 &lt;= k &lt; nums.length</code>）上进行了 <strong>旋转</strong>，使数组变为 <code>[nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]</code>（下标 <strong>从 0 开始</strong> 计数）。例如， <code>[0,1,2,4,5,6,7]</code> 在下标 <code>3</code> 处经旋转后可能变为 <code>[4,5,6,7,0,1,2]</code> 。</p>
+<p>给你 <strong>旋转后</strong> 的数组 <code>nums</code> 和一个整数 <code>target</code> ，如果 <code>nums</code> 中存在这个目标值 <code>target</code> ，则返回它的下标，否则返回 <code>-1</code> 。</p>
+<p>你必须设计一个时间复杂度为 <code>O(log n)</code> 的算法解决此问题。</p>
+<hr>
+
+<p>这道题给定是一个有序无重复数组经过数次旋转后得到的数组，要求我们在其中找到<code>target</code>并返回其下标，如果没有返回<code>-1</code>。</p>
+<p>我们可以用两次二分来解决这道题，首先类似于上一道题的查找峰值，我们先使用二分找到数组中的最小值，也就是找到两段递增数组的分界点，然后比较<code>target</code>与数组中最后一位数<code>last</code>的大小，如果<code>target</code>比<code>last</code>小，则说明其在第二段递增数组中，否则在第一段。然后最相应的数组再做一次二分即可。</p>
+<p>题解代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">l</span> <span class="operator">=</span> <span class="number">0</span>, r = n - <span class="number">2</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">last</span> <span class="operator">=</span> nums[n - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">while</span>(l &lt;= r) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> l + (r - l &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &gt; last) l = mid + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(target &lt;= last)&#123;</span><br><span class="line">            r = n - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(l &lt;= r) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> l + (r - l &gt;&gt; <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">if</span>(nums[mid] &lt; target) l = mid + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(l == nums.length) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> nums[l] == target ? l : -<span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            r = l - <span class="number">1</span>;</span><br><span class="line">            l = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>(l &lt;= r) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> l + (r - l &gt;&gt; <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">if</span>(nums[mid] &lt; target) l = mid + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> nums[l] == target ? l : -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在寻找低谷时，我们将比较对象定为<code>last</code>，这是因为我们要寻找最小值，如果<code>mid</code>比<code>last</code>要大，则说明数组一定被分割过并且<code>mid</code>在最小值左侧，移动<code>left</code>，反之移动<code>right</code>。并且由于我们的比较对象是<code>last</code>，所以二分时不需要考虑它，<code>r</code>直接定为<code>n-2</code>。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">楪舞飞祈</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/inori/6b525bdc.html">http://example.com/inori/6b525bdc.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">楪祈のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Algorithms/">Algorithms</a></div><div class="post_share"><div class="social-share" data-image="https://api.suyanw.cn/api/comic3.php" data-sites="qq,wechat,twitter,weibo"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/inori/64d6f53b.html" title="强化学习基础知识"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">强化学习基础知识</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">楪舞飞祈</div><div class="author-info__description">星座になれたら。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/inori-320"><i class="fab fa-github"></i><span>My GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:719471785@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p align="center" color="brown">多读书，多看报，少吃零食，多睡觉。</p></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/inori/6b525bdc.html" title="二分查找算法入门"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="二分查找算法入门"/></a><div class="content"><a class="title" href="/inori/6b525bdc.html" title="二分查找算法入门">二分查找算法入门</a><time datetime="2025-02-17T06:59:22.000Z" title="发表于 2025-02-17 14:59:22">2025-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/64d6f53b.html" title="强化学习基础知识"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="强化学习基础知识"/></a><div class="content"><a class="title" href="/inori/64d6f53b.html" title="强化学习基础知识">强化学习基础知识</a><time datetime="2024-06-06T08:06:57.000Z" title="发表于 2024-06-06 16:06:57">2024-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/8f832495.html" title="pytorch基础入门"><img src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pytorch基础入门"/></a><div class="content"><a class="title" href="/inori/8f832495.html" title="pytorch基础入门">pytorch基础入门</a><time datetime="2024-05-23T08:30:34.000Z" title="发表于 2024-05-23 16:30:34">2024-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/e0d16fd2.html" title="numpy常用api"><img src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="numpy常用api"/></a><div class="content"><a class="title" href="/inori/e0d16fd2.html" title="numpy常用api">numpy常用api</a><time datetime="2024-05-21T11:18:34.000Z" title="发表于 2024-05-21 19:18:34">2024-05-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/54da7039.html" title="机器学习基础知识"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="机器学习基础知识"/></a><div class="content"><a class="title" href="/inori/54da7039.html" title="机器学习基础知识">机器学习基础知识</a><time datetime="2024-05-20T06:27:45.000Z" title="发表于 2024-05-20 14:27:45">2024-05-20</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://api.suyanw.cn/api/comic3.php')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By 楪舞飞祈</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
