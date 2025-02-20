@@ -1,0 +1,310 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>redis高级篇 | 楪祈のBlog</title><meta name="author" content="楪舞飞祈"><meta name="copyright" content="楪舞飞祈"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="redis入门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis高级篇">
+<meta property="og:url" content="http://example.com/inori/1e2438b1.html">
+<meta property="og:site_name" content="楪祈のBlog">
+<meta property="og:description" content="redis入门">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://api.suyanw.cn/api/comic3.php">
+<meta property="article:published_time" content="2025-02-19T07:30:39.000Z">
+<meta property="article:modified_time" content="2025-02-20T11:00:31.755Z">
+<meta property="article:author" content="楪舞飞祈">
+<meta property="article:tag" content="redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://api.suyanw.cn/api/comic3.php"><link rel="shortcut icon" href="/img/favicon_32.png"><link rel="canonical" href="http://example.com/inori/1e2438b1.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'redis高级篇',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-02-20 19:00:31'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/rss2.xml" title="楪祈のBlog" type="application/rss+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.suyanw.cn/api/comic3.php')"><nav id="nav"><span id="blog-info"><a href="/" title="楪祈のBlog"><span class="site-name">楪祈のBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">redis高级篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-19T07:30:39.000Z" title="发表于 2025-02-19 15:30:39">2025-02-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-20T11:00:31.755Z" title="更新于 2025-02-20 19:00:31">2025-02-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/redis/">redis</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="redis高级篇"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="分布式缓存"><a href="#分布式缓存" class="headerlink" title="分布式缓存"></a>分布式缓存</h1><p>之前学的都是单点Redis，而这种单点Redis存在一些问题：</p>
+<ul>
+<li>数据丢失</li>
+<li>并发能力差</li>
+<li>存储量小</li>
+<li>故障恢复能力弱</li>
+</ul>
+<p>我们可以使用Redis分布式缓存解决以上问题。</p>
+<h2 id="Redis持久化解决数据丢失问题"><a href="#Redis持久化解决数据丢失问题" class="headerlink" title="Redis持久化解决数据丢失问题"></a>Redis持久化解决数据丢失问题</h2><h3 id="RDB持久化"><a href="#RDB持久化" class="headerlink" title="RDB持久化"></a>RDB持久化</h3><p>RDB全称 <code>Redis Database Backup file</code>（Redis数据备份文件），也可以称为叫<strong>Redis数据快照</strong>。简单来说就是把内存中的所有数据都记录到磁盘中。当Redis实例故障重启后，从磁盘读取快照文件，恢复数据。快照文件称为<strong>RDB文件</strong>，默认是保存在<strong>当前运行目录</strong>。</p>
+<p>RDB持久化的执行条件有<strong>save命令</strong>、<strong>bfsave命令</strong>、<strong>Redis手动停机</strong>、<strong>触发系统内置RDB条件时</strong>。</p>
+<h4 id="save命令"><a href="#save命令" class="headerlink" title="save命令"></a>save命令</h4><p>使用<code>redis-cli</code>链接到redis中后使用<code>save</code>命令可以立刻执行一次RDB。save命令会导致<strong>主进程执行RDB</strong>，这个过程中<strong>其它所有命令都会被阻塞</strong>。只有在数据迁移时可能用到。</p>
+<h4 id="bgsave命令"><a href="#bgsave命令" class="headerlink" title="bgsave命令"></a>bgsave命令</h4><p>与<code>save</code>命令的执行步骤相同，但<code>bgsave</code>命令执行是异步的，执行后会<strong>开启独立进程完成RDB</strong>，主进程可以持续处理用户请求，不受影响。</p>
+<h4 id="停机"><a href="#停机" class="headerlink" title="停机"></a>停机</h4><p>主动停机时会自动执行一次RDB</p>
+<h4 id="Redis内置RDB条件"><a href="#Redis内置RDB条件" class="headerlink" title="Redis内置RDB条件"></a>Redis内置RDB条件</h4><p>Redis内部有触发RDB的机制，可以在<code>redis.conf</code>文件中找到（保持默认即可），格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 900秒内，如果至少有1个key被修改，则执行bgsave， 如果是save &quot;&quot; 则表示禁用RDB</span><br><span class="line">save 900 1  </span><br><span class="line">save 300 10  </span><br><span class="line">save 60 10000 </span><br><span class="line"></span><br><span class="line"># 是否压缩,建议不开启</span><br><span class="line">rdbcompression yes</span><br><span class="line"></span><br><span class="line"># RDB文件名称</span><br><span class="line">dbfilename dump.rdb  </span><br><span class="line"></span><br><span class="line"># 文件保存的路径目录</span><br><span class="line">dir ./ </span><br></pre></td></tr></table></figure>
+
+<h4 id="RDB原理"><a href="#RDB原理" class="headerlink" title="RDB原理"></a>RDB原理</h4><p>当 bgsave 执行时，主进程会 fork（fork()是unix和linux这种操作系统的一个api） 一个子进程，子进程共享主进程的内存数据，完成fork后子进程读取内存数据并写入 RDB 文件。</p>
+<p>当子进程读取内存数据写入 RDB 文件时，主进程可以继续进行工作，依靠的是 <code>copy-on-write</code> 技术。</p>
+<ul>
+<li>当主进程执行读操作时，直接访问共享内存</li>
+<li>当主进程执行写操作时，则会在内存中拷贝一份数据，对拷贝的数据执行写操作，这样不会影响到子进程读取的内存数据</li>
+</ul>
+<h4 id="如果不使用copy-on-write会怎么样？"><a href="#如果不使用copy-on-write会怎么样？" class="headerlink" title="如果不使用copy-on-write会怎么样？"></a>如果不使用copy-on-write会怎么样？</h4><p>不使用copy-on-write，就意味着子进程在进行写RDB文件时，主进程可以修改子进程要读取的内存数据，那么就无法保证某一时刻数据的一致性。</p>
+<h4 id="RDB的缺点"><a href="#RDB的缺点" class="headerlink" title="RDB的缺点"></a>RDB的缺点</h4><ul>
+<li>RDB执行间隔时间长，两次RDB之间写入数据有丢失风险</li>
+<li>fork子进程、压缩、写出RDB文件都比较耗时</li>
+</ul>
+<h3 id="AOF持久化"><a href="#AOF持久化" class="headerlink" title="AOF持久化"></a>AOF持久化</h3><p>AOF全称为<code>Append Only File</code>（追加文件）。Redis处理的<strong>每一个写命令都会记录在AOF文件</strong>，可以看做是命令日志文件。（<strong>由主进程先写入到缓冲区，之后由后台线程将缓冲区中的数据写入到AOF文件</strong>）</p>
+<h4 id="AOF配置"><a href="#AOF配置" class="headerlink" title="AOF配置"></a>AOF配置</h4><p>AOF在<code>redis.conf</code>中默认是关闭的，需要修改<code>redis.conf</code>配置文件开启AOF:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 是否开启AOF功能，默认是no</span><br><span class="line">appendonly yes</span><br><span class="line"># AOF文件的名称</span><br><span class="line">appendfilename &quot;appendonly.aof&quot;</span><br><span class="line"># 表示每执行一次写命令，立即记录到AOF文件</span><br><span class="line">appendfsync always </span><br><span class="line"># 写命令执行完先放入AOF缓冲区，然后表示每隔1秒将缓冲区数据写到AOF文件，是默认方案</span><br><span class="line">appendfsync everysec </span><br><span class="line"># 写命令执行完先放入AOF缓冲区，由操作系统决定何时将缓冲区内容写回磁盘</span><br><span class="line">appendfsync no</span><br></pre></td></tr></table></figure>
+
+<p><code>appendfsync</code>三种策略对比：</p>
+<table>
+<thead>
+<tr>
+<th align="center">配置项</th>
+<th align="center">刷盘实机</th>
+<th align="center">优点</th>
+<th align="center">缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">always</td>
+<td align="center">同步刷盘</td>
+<td align="center">可靠性高，几乎不丢失数据</td>
+<td align="center">性能影响大</td>
+</tr>
+<tr>
+<td align="center">everysec</td>
+<td align="center">每秒刷盘</td>
+<td align="center">性能适中</td>
+<td align="center">可能会丢失1秒内的数据</td>
+</tr>
+<tr>
+<td align="center">no</td>
+<td align="center">操作系统控制</td>
+<td align="center">性能最好</td>
+<td align="center">可靠性较差，可能丢失大量数据</td>
+</tr>
+</tbody></table>
+<h4 id="AOF文件重写"><a href="#AOF文件重写" class="headerlink" title="AOF文件重写"></a>AOF文件重写</h4><p>因为是记录命令，AOF文件会比RDB文件大的多。而且AOF会记录对<strong>同一个key的多次写操作</strong>，但只有最后一次写操作才有意义。通过执行<code>bgrewriteaof</code>命令，可以<strong>让AOF文件执行重写功能</strong>，用最少的命令达到相同效果。</p>
+<p>如果一直没执行此命令，Redis也会在触发阈值时自动重写AOF文件（<strong>异步执行</strong>）。阈值也可以在<code>redis.conf</code>中配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># AOF文件比上次文件 增长超过多少百分比则触发重写</span><br><span class="line">auto-aof-rewrite-percentage 100</span><br><span class="line"># AOF文件体积最小多大以上才触发重写 </span><br><span class="line">auto-aof-rewrite-min-size 64mb </span><br></pre></td></tr></table></figure>
+
+<h3 id="RDB与AOF对比"><a href="#RDB与AOF对比" class="headerlink" title="RDB与AOF对比"></a>RDB与AOF对比</h3><p>在实际开发中往往会结合两者来使用</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>RDB</th>
+<th>AOF</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>持久化方式</td>
+<td>定时对整个内存做快照</td>
+<td>每一次执行的命令</td>
+</tr>
+<tr>
+<td>数据完整性</td>
+<td>不完整，两次备份之间会丢失</td>
+<td>相对完整，取决于刷盘策略</td>
+</tr>
+<tr>
+<td>文件大小</td>
+<td>会有压缩，文件体积小</td>
+<td>记录命令，文件体积很大</td>
+</tr>
+<tr>
+<td>宕机恢复速度</td>
+<td>快</td>
+<td>慢</td>
+</tr>
+<tr>
+<td>数据恢复优先级</td>
+<td>低，数据完整性不如AOF</td>
+<td>高，因为数据完整性更高</td>
+</tr>
+<tr>
+<td>系统资源占用</td>
+<td>高，大量CUP和内存消耗</td>
+<td>低，主要是磁盘IO占用，但AOF重写时会占用大量CPU和内存资源</td>
+</tr>
+<tr>
+<td>使用场景</td>
+<td>可容忍数分钟的数据丢失，追求更快的启动速度</td>
+<td>对数据安全性要求较高</td>
+</tr>
+</tbody></table>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h4><ul>
+<li>RDB是一种快照持久化方法，它会在指定的时间间隔内生成数据的完整快照</li>
+<li>适合于灾难恢复，可以很方便的被迁移到另一个数据中心</li>
+<li>RDB在保存快照时速度快，恢复时也非常迅速，适合用作备份</li>
+<li>最后一次快照之后的数据可能会丢失，因为这部分数据还没有被写入快照</li>
+</ul>
+<h4 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h4><ul>
+<li>AOF记录每一条写命令</li>
+<li>AOF提供了更好的数据安全性，可以配置为每秒同步一次，或者每写入一条命令就同步一次</li>
+<li>AOF文件通常会比RDB文件更大，且恢复速度可能会更慢，但可以通过AOF文件重写进行压缩</li>
+<li>AOF在系统崩溃时能最大化数据恢复，最多只丢失几秒钟的数据</li>
+</ul>
+<p>如果需要<strong>快速恢复</strong>且可以<strong>接受少量数据丢失</strong>，RDB可能是更好的选择。如果<strong>注重数据完整性</strong>且<strong>可以接受较慢的恢复速度</strong>，则应该使用AOF。在很多场景下，结合使用RDB和AOF能提供更为可靠的数据保护机制。</p>
+<h2 id="主从集群解决并发问题"><a href="#主从集群解决并发问题" class="headerlink" title="主从集群解决并发问题"></a>主从集群解决并发问题</h2><p>单节点Redis的并发能力是有上限的，要进一步提高Redis的并发能力，就需要搭建主从集群，实现读写分离。</p>
+<p>主从集群可以是一台Redis服务器作为主节点(master)，数台服务器作为从节点(slave)，主节点只负责写数据，从节点只负责读数据。</p>
+<h3 id="数据同步原理"><a href="#数据同步原理" class="headerlink" title="数据同步原理"></a>数据同步原理</h3><p>主从之间的第一次同步<strong>全量同步</strong>，既要加载RDB文件，又要读取并执行repl_baklog中的命令。</p>
+<p><img src="/img/loading.gif" data-original="D:\Blog\source\img\master&slave.png" alt="master&amp;slave"></p>
+<p><strong>如何判断是不是第一次同步？</strong></p>
+<ul>
+<li><strong>replication id</strong>：简称replid，数据集标记，id一致则说明是同一数据集。每一个master都有唯一的replid，slave则会继承master节点的replid</li>
+<li><strong>offset</strong>：偏移量，随着记录在<code>repl_baklog</code>中的数据增多而逐渐增大。slave完成同步时也会记录当前同步的offset。如果slave的offset小于master的offset，说明slave数据落后于master，需要更新。</li>
+</ul>
+<p>因此slave做数据同步，必须向master声明自己的replication id和offset，master才可以判断到底需要同步哪些数据</p>
+<p>一般来讲，如果id能对上就不用做全量同步，但是<code>repl_baklog</code>大小有上限，写满后会覆盖最早的数据。如果slave断开时间过久，导致尚未备份的数据被覆盖，则无法同步基于log做增量同步，只能再次做全量同步。</p>
+<h3 id="优化主从集群性能"><a href="#优化主从集群性能" class="headerlink" title="优化主从集群性能"></a>优化主从集群性能</h3><ul>
+<li>在master中配置<code>repl-diskless-sync yes</code>启用无磁盘复制，避免全量同步时的磁盘IO。</li>
+<li>Redis单节点上的内存占用不要太大，减少RDB导致的过多磁盘IO</li>
+<li>适当提高<code>repl_baklog</code>的大小，发现slave宕机时尽快实现故障恢复，尽可能避免全量同步</li>
+<li>限制一个master上的slave节点数量，如果实在是太多slave，则可以采用主-从-从链式结构，减少master压力</li>
+</ul>
+<p>未完待续…..</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">楪舞飞祈</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/inori/1e2438b1.html">http://example.com/inori/1e2438b1.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">楪祈のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/redis/">redis</a></div><div class="post_share"><div class="social-share" data-image="https://api.suyanw.cn/api/comic3.php" data-sites="qq,wechat,twitter,weibo"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/inori/6b525bdc.html" title="二分查找算法入门"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">二分查找算法入门</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/inori/a9e82450.html" title="redis进阶篇"><img class="cover" src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-16</div><div class="title">redis进阶篇</div></div></a></div><div><a href="/inori/8660e5c0.html" title="redis入门篇"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-05</div><div class="title">redis入门篇</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">楪舞飞祈</div><div class="author-info__description">星座になれたら。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/inori-320"><i class="fab fa-github"></i><span>My GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:719471785@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p align="center" color="brown">多读书，多看报，少吃零食，多睡觉。</p></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98"><span class="toc-number">1.</span> <span class="toc-text">分布式缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E6%8C%81%E4%B9%85%E5%8C%96%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">Redis持久化解决数据丢失问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDB%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">1.1.1.</span> <span class="toc-text">RDB持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#save%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">save命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bgsave%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">bgsave命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%81%9C%E6%9C%BA"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">停机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Redis%E5%86%85%E7%BD%AERDB%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">Redis内置RDB条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RDB%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.1.5.</span> <span class="toc-text">RDB原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E4%B8%8D%E4%BD%BF%E7%94%A8copy-on-write%E4%BC%9A%E6%80%8E%E4%B9%88%E6%A0%B7%EF%BC%9F"><span class="toc-number">1.1.1.6.</span> <span class="toc-text">如果不使用copy-on-write会怎么样？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RDB%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="toc-number">1.1.1.7.</span> <span class="toc-text">RDB的缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOF%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">1.1.2.</span> <span class="toc-text">AOF持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#AOF%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">AOF配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AOF%E6%96%87%E4%BB%B6%E9%87%8D%E5%86%99"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">AOF文件重写</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RDB%E4%B8%8EAOF%E5%AF%B9%E6%AF%94"><span class="toc-number">1.1.3.</span> <span class="toc-text">RDB与AOF对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.1.4.</span> <span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RDB"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">RDB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AOF"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">AOF</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E9%9B%86%E7%BE%A4%E8%A7%A3%E5%86%B3%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">主从集群解决并发问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.1.</span> <span class="toc-text">数据同步原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E4%B8%BB%E4%BB%8E%E9%9B%86%E7%BE%A4%E6%80%A7%E8%83%BD"><span class="toc-number">1.2.2.</span> <span class="toc-text">优化主从集群性能</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/inori/1e2438b1.html" title="redis高级篇"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="redis高级篇"/></a><div class="content"><a class="title" href="/inori/1e2438b1.html" title="redis高级篇">redis高级篇</a><time datetime="2025-02-19T07:30:39.000Z" title="发表于 2025-02-19 15:30:39">2025-02-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/6b525bdc.html" title="二分查找算法入门"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="二分查找算法入门"/></a><div class="content"><a class="title" href="/inori/6b525bdc.html" title="二分查找算法入门">二分查找算法入门</a><time datetime="2025-02-17T06:59:22.000Z" title="发表于 2025-02-17 14:59:22">2025-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/64d6f53b.html" title="强化学习基础知识"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="强化学习基础知识"/></a><div class="content"><a class="title" href="/inori/64d6f53b.html" title="强化学习基础知识">强化学习基础知识</a><time datetime="2024-06-06T08:06:57.000Z" title="发表于 2024-06-06 16:06:57">2024-06-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/8f832495.html" title="pytorch基础入门"><img src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pytorch基础入门"/></a><div class="content"><a class="title" href="/inori/8f832495.html" title="pytorch基础入门">pytorch基础入门</a><time datetime="2024-05-23T08:30:34.000Z" title="发表于 2024-05-23 16:30:34">2024-05-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/e0d16fd2.html" title="numpy常用api"><img src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="numpy常用api"/></a><div class="content"><a class="title" href="/inori/e0d16fd2.html" title="numpy常用api">numpy常用api</a><time datetime="2024-05-21T11:18:34.000Z" title="发表于 2024-05-21 19:18:34">2024-05-21</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://api.suyanw.cn/api/comic3.php')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By 楪舞飞祈</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
