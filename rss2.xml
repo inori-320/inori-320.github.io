@@ -9,7 +9,7 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>星座になれたら。</description>
-    <pubDate>Wed, 05 Mar 2025 06:41:58 GMT</pubDate>
+    <pubDate>Wed, 05 Mar 2025 06:55:09 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -18,11 +18,11 @@
       <guid>http://example.com/inori/364ea8cc.html</guid>
       <pubDate>Wed, 05 Mar 2025 06:35:13 GMT</pubDate>
       
-      <description>SpringCloud</description>
+      <description>设计模式</description>
       
       
       
-      <content:encoded><![CDATA[<p>待更新……</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>待更新……</p><p>随便插入一张图片…</p><p><img src="/inori/364ea8cc/img/aaa.png" alt="aaa"></p>]]></content:encoded>
       
       
       <category domain="http://example.com/categories/java/">java</category>
