@@ -1,0 +1,369 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>redis网络模型 | 楪祈のBlog</title><meta name="author" content="楪舞飞祈"><meta name="copyright" content="楪舞飞祈"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="redis入门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis网络模型">
+<meta property="og:url" content="http://example.com/inori/e34c024b.html">
+<meta property="og:site_name" content="楪祈のBlog">
+<meta property="og:description" content="redis入门">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgapi.xl0408.top/index.php">
+<meta property="article:published_time" content="2025-03-01T00:30:39.000Z">
+<meta property="article:modified_time" content="2025-03-03T02:19:07.505Z">
+<meta property="article:author" content="楪舞飞祈">
+<meta property="article:tag" content="redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgapi.xl0408.top/index.php"><link rel="shortcut icon" href="/img/favicon_32.png"><link rel="canonical" href="http://example.com/inori/e34c024b.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'redis网络模型',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-03-03 10:19:07'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/rss2.xml" title="楪祈のBlog" type="application/rss+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">50</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://imgapi.xl0408.top/index.php')"><nav id="nav"><span id="blog-info"><a href="/" title="楪祈のBlog"><span class="site-name">楪祈のBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">redis网络模型</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-01T00:30:39.000Z" title="发表于 2025-03-01 08:30:39">2025-03-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-03T02:19:07.505Z" title="更新于 2025-03-03 10:19:07">2025-03-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/redis/">redis</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="redis网络模型"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Linux网络模型"><a href="#Linux网络模型" class="headerlink" title="Linux网络模型"></a>Linux网络模型</h1><p>在《UNIX网络编程》一书中，总结归纳了5种IO模型：</p>
+<ul>
+<li>阻塞IO（Blocking IO）</li>
+<li>非阻塞IO（Nonblocking IO）</li>
+<li>IO多路复用（IO Multiplexing）</li>
+<li>信号驱动IO（Signal Driven IO）</li>
+<li>异步IO（Asynchronous IO）</li>
+</ul>
+<h2 id="阻塞IO"><a href="#阻塞IO" class="headerlink" title="阻塞IO"></a>阻塞IO</h2><p>应用程序想要去读取数据，他是无法直接去读取磁盘数据的，他需要先到内核里边去等待内核操作硬件拿到数据，这个过程就是1，是需要等待的，等到内核从磁盘上把数据加载出来之后，再把这个数据写给用户的缓存区，这个过程是2，如果是阻塞IO，那么整个过程中，用户从发起读请求开始，一直到读取到数据，都是一个阻塞状态。</p>
+<p><img src="/img/loading.gif" data-original="D:\Blog\source\img\Blocking_IO.png" alt="Blocking_IO"></p>
+<p>用户去读取数据时，会去先发起recvform一个命令，去尝试从内核上加载数据，如果内核没有数据，那么用户就会等待，此时内核会去从硬件上读取数据，内核读取数据之后，会把数据拷贝到用户态，并且返回ok，整个过程，都是阻塞等待的，这就是阻塞IO</p>
+<h2 id="非阻塞IO"><a href="#非阻塞IO" class="headerlink" title="非阻塞IO"></a>非阻塞IO</h2><p>非阻塞IO的recvfrom操作会立即返回结果而不是阻塞用户进程</p>
+<p>阶段一：</p>
+<ul>
+<li>用户进程尝试读取数据（比如网卡数据）</li>
+<li>此时数据尚未到达，内核需要等待数据</li>
+<li>返回异常给用户进程</li>
+<li>用户进程拿到error后，再次尝试读取</li>
+<li>循环往复，直到数据就绪</li>
+</ul>
+<p>阶段二：</p>
+<ul>
+<li>将内核数据拷贝到用户缓冲区</li>
+<li>拷贝过程中，用户进程依然阻塞等待</li>
+<li>拷贝完成，用户进程解除阻塞，处理数据</li>
+</ul>
+<p>可以看到，非阻塞IO模型中，用户进程在第一个阶段是非阻塞，第二个阶段是阻塞状态。虽然是非阻塞，但性能并没有得到提高。而且忙等机制会导致CPU空转，CPU使用率暴增</p>
+<p><img src="/img/loading.gif" data-original="D:\Blog\source\img\Nonblocking_IO.png" alt="Nonblocking_IO"></p>
+<h2 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h2><p>论是阻塞IO还是非阻塞IO，用户应用在一阶段都需要调用recvfrom来获取数据，差别在于无数据时的处理方案：</p>
+<ul>
+<li>如果调用recvfrom时，恰好没有数据，阻塞IO会使CPU阻塞，非阻塞IO使CPU空转，都不能充分发挥CPU的作用</li>
+<li>如果调用recvfrom时，恰好有数据，则用户进程可以直接进入第二阶段，读取并处理数据</li>
+</ul>
+<p>而在单线程情况下，只能依次处理IO事件，如果正在处理的IO事件恰好未就绪（数据不可读或不可写），线程就会被阻塞，所有IO事件都必须等待，性能表现很差</p>
+<p>想要提高IO事件效率，可以使用多线程，或者即时通知（哪个数据就绪，用户进程就读取这个数据）</p>
+<p>那么用户进程如何知道内核中数据是否就绪呢？</p>
+<p>这个问题的解决依赖于提出的文件描述符。</p>
+<p>文件描述符（File Descriptor）：简称FD，是一个从0开始的无符号整数，用来关联Linux中的一个文件。在Linux中，一切皆文件，例如常规文件、视频、硬件设备等，当然也包括网络套接字（Socket）</p>
+<p>通过FD，我们的网络模型可以利用一个线程监听多个FD，并在某个FD可读、可写时得到通知，从而避免无效的等待，充分利用CPU资源</p>
+<p>用IO复用模式，可以确保去读数据的时候，数据是一定存在的，他的效率比原来的阻塞IO和非阻塞IO性能都要高</p>
+<p>IO多路复用即线程来同时监听多个FD，并在某个FD可读、可写时得到通知，从而避免无效的等待，充分利用CPU资源。不过监听FD的方式、通知的方式又有多种实现，常见的有：</p>
+<ol>
+<li>select</li>
+<li>poll</li>
+<li>epoll</li>
+</ol>
+<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p>select是Linux最早是由的I&#x2F;O多路复用技术。</p>
+<p>具体可以描述为：我们把需要处理的数据封装成FD，然后在用户态时创建一个fd的集合（这个集合的大小是要监听的那个FD的最大值+1），这个集合的长度大小是有限制的，同时在这个集合中，标明出来我们要控制哪些数据</p>
+<p>比如要监听的数据，是1,2,5三个数据，此时会执行select函数，然后将整个fd发给内核态，内核态会去遍历用户态传递过来的数据，如果发现这里边都数据都没有就绪，就休眠，直到有数据准备好时，就会被唤醒，唤醒之后，再次遍历一遍，看看谁准备好了，然后再将处理掉没有准备好的数据，最后再将这个FD集合写回到用户态中去，此时用户态就知道了，奥，有人准备好了，但是对于用户态而言，并不知道谁处理好了，所以用户态也需要去进行遍历，然后找到对应准备好数据的节点，再去发起读请求</p>
+<p>seletc模式存在的问题：</p>
+<ul>
+<li>需要将整个fd_set用户空间拷贝到内核空间，select结束还要再次拷贝回用户空间</li>
+<li>select无法得知具体是哪个fd就绪，需要遍历整个fd_set</li>
+<li>fd_set监听的fd数量不能超过1024</li>
+</ul>
+<h3 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h3><p>poll模式对select模式做了简单改进，但性能提升不明显，IO流程：</p>
+<ol>
+<li>创建pollfd数组，向其中添加关注的fd信息，<strong>数组大小自定义</strong></li>
+<li>调用poll函数，将pollfd数组拷贝到内核空间，转链表存储，无上限</li>
+<li>内核遍历fd，判断是否就绪</li>
+<li>数据就绪或超时后，拷贝pollfd数组到用户空间，返回就绪fd数量n</li>
+<li>用户进程判断n是否大于0,大于0则遍历pollfd数组，找到就绪的fd</li>
+</ol>
+<p>与select对比：</p>
+<ul>
+<li><p>select模式中的fd_set大小固定为1024，而pollfd在内核中采用链表，理论上无上限</p>
+</li>
+<li><p>监听FD越多，每次遍历消耗时间也越久，性能反而会下降</p>
+</li>
+</ul>
+<h3 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h3><p>epoll模式是对select和poll的改进，它提供了三个函数：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">eventpoll</span> &#123;</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rb_root</span> <span class="title">rbr</span>;</span>		<span class="comment">// 一颗红黑树，记录要监听的FD</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">rdlist</span>;</span>	<span class="comment">// 一个链表，记录就绪的FD</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//1.创建一个epoll实例,内部是event poll，返回对应的句柄epfd</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">epoll_create</span><span class="params">(<span class="type">int</span> size)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.将一个FD添加到epoll的红黑树中，并设置ep_pollL_callback</span></span><br><span class="line"><span class="comment">// callback触发时，就把对应的FD加入到rdlist这个就绪列表中</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">epoll_ctl</span><span class="params">(</span></span><br><span class="line"><span class="params">    <span class="type">int</span> epfd; <span class="comment">// epoll实例的句柄</span></span></span><br><span class="line"><span class="params">    <span class="type">int</span> op;	<span class="comment">//要执行的操作，包括：ADD、MOD、DEL</span></span></span><br><span class="line"><span class="params">    <span class="type">int</span> fd; <span class="comment">//要监听的FD</span></span></span><br><span class="line"><span class="params">    <span class="keyword">struct</span> epoll_event *event;	<span class="comment">//要监听的事件类型:读、写、异常等</span></span></span><br><span class="line"><span class="params">&#125;;</span></span><br><span class="line"><span class="params"></span></span><br><span class="line"><span class="params"><span class="comment">// 3.检查rdlist列表是否为空，不为空则返回就绪的FD的数量</span></span></span><br><span class="line"><span class="params"><span class="type">int</span> epoll_wait(</span></span><br><span class="line"><span class="params">    <span class="type">int</span> epfd;	<span class="comment">// epoll实例的句柄</span></span></span><br><span class="line"><span class="params">    <span class="keyword">struct</span> epoll_event *events;	<span class="comment">//空event数组，用于接收就绪的FD</span></span></span><br><span class="line"><span class="params">    <span class="type">int</span> maxevents;	<span class="comment">//events数组的最大长度</span></span></span><br><span class="line"><span class="params">    <span class="type">int</span> timeout;	<span class="comment">// 超时时间，-1用不超时，0不阻塞；大于0为阻塞时间</span></span></span><br><span class="line"><span class="params">&#125;;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><ol>
+<li>使用epoll_create创建epoll实例</li>
+<li>紧接着调用epoll_ctl操作，将要监听的数据添加到红黑树上去，并且给每个fd设置一个监听函数，这个函数会在fd数据就绪时触发，把fd数据添加到list_head中去，epoll_ctl中的epfd表明要将监听的fd添加到eventepoll中</li>
+<li>使用epoll_wait等待fd就绪，在用户态创建一个空的events数组，当就绪之后，我们的回调函数会把数据添加到list_head中去，当调用这个函数的时候，会去检查list_head，如果在此过程中，检查到了list_head中有数据会将数据添加到链表中，此时将数据放入到events数组中，并且返回对应的操作的数量</li>
+<li>用户态的此时收到响应后，从events中拿到对应准备好的数据的节点，再去调用方法去拿数据</li>
+</ol>
+<h4 id="epoll中的事件通知模式"><a href="#epoll中的事件通知模式" class="headerlink" title="epoll中的事件通知模式"></a>epoll中的事件通知模式</h4><p>当FD有数据可读时，我们调用epoll_wait可以得到通知。但是事件通知的模式有两种：</p>
+<ul>
+<li>LevelTriggered：简称LT，也叫做水平触发。只要某个FD中有数据可读，每次调用epoll_wait都会得到通知。</li>
+<li>EdgeTriggered：简称ET，也叫做边沿触发。只有在某个FD有状态变化时，调用epoll_wait才会被通知。</li>
+</ul>
+<p>假设一个客户端socket对应的FD已经注册到了epoll实例中，客户端socket发送了2kb的数据，服务端调用epoll_wait，得到通知说FD就绪，服务端从FD读取了1kb数据</p>
+<ul>
+<li>如果我们采用LT模式，因为FD中仍有1kb数据，调用epoll_wait依然会返回结果，并且得到通知</li>
+<li>如果我们采用ET模式，因为已经消费了FD可读事件，后续FD状态没有变化，因此epoll_wait不会返回，数据无法读取，客户端响应超时</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>LT 模式</strong></th>
+<th><strong>ET 模式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>触发条件</strong></td>
+<td>只要条件满足，持续通知。</td>
+<td>只有状态变化时通知一次。</td>
+</tr>
+<tr>
+<td><strong>通知频率</strong></td>
+<td>高</td>
+<td>低</td>
+</tr>
+<tr>
+<td><strong>性能</strong></td>
+<td>较低，适合低并发场景。</td>
+<td>较高，适合高并发场景。</td>
+</tr>
+<tr>
+<td><strong>编程复杂度</strong></td>
+<td>简单，无需担心事件丢失。</td>
+<td>复杂，需要确保一次性处理完数据。</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>简单的 I&#x2F;O 操作或初学者。</td>
+<td>高并发、高性能的网络服务器。</td>
+</tr>
+</tbody></table>
+<h2 id="信号驱动IO"><a href="#信号驱动IO" class="headerlink" title="信号驱动IO"></a>信号驱动IO</h2><p>信号驱动IO是与内核建立SIGIO的信号关联并设置回调，当内核有FD就绪时，会发出SIGIO信号通知用户，期间用户应用可以执行其它业务，无需阻塞等待。</p>
+<p>流程：</p>
+<ol>
+<li>用户进程调用sigaction，注册信号处理函数</li>
+<li>内核返回成功，开始监听FD</li>
+<li>用户进程不阻塞等待，可以执行其它业务</li>
+<li>当内核数据就绪后，回调用户进程的SIGIO处理函数</li>
+<li>收到SIGIO回调信号后，用户进程调用recvfrom，读取</li>
+<li>内核将数据拷贝到用户空间</li>
+<li>用户进程处理数据</li>
+</ol>
+<p>当有大量IO操作时，信号较多，SIGIO处理函数不能及时处理可能导致信号队列溢出，而且内核空间与用户空间的频繁信号交互性能也较低。</p>
+<h2 id="异步IO"><a href="#异步IO" class="headerlink" title="异步IO"></a>异步IO</h2><p>这种方式，不仅仅是用户态在试图读取数据后，不阻塞，而且当内核的数据准备完成后，也不会阻塞</p>
+<p>他会由内核将所有数据处理完成后，由内核将数据写入到用户态中，然后才算完成，所以性能极高，不会有任何阻塞，全部都由内核完成，可以看到，异步IO模型中，用户进程在两个阶段都是非阻塞状态</p>
+<p><img src="/img/loading.gif" data-original="D:\Blog\source\img\asyncIO.png" alt="asyncIO"></p>
+<p>异步IO避免了同步I&#x2F;O中的等待时间，提高了CPU和I&#x2F;O设备的利用率，但是这种方式对内核的负载很大，在高并发场景下可能会因为内存占用过多出现崩溃现象。如果要使用必须要做并发访问的限流</p>
+<h1 id="Redis网络模型"><a href="#Redis网络模型" class="headerlink" title="Redis网络模型"></a>Redis网络模型</h1><p><strong>Redis到底是单线程还是多线程？</strong></p>
+<ul>
+<li>如果仅仅聊Redis的核心业务部分（命令处理），答案是单线程</li>
+<li>如果是聊整个Redis，那么答案是多线程</li>
+</ul>
+<p>在Redis版本迭代过程中，在两个重要的时间节点上引入了多线程的支持：</p>
+<ul>
+<li>Redis v4.0：引入多线程异步处理一些耗时较久的任务，例如异步删除命令unlink</li>
+<li>Redis v6.0 ：在核心网络模型中引入多线程，进一步提高对多核cpu的利用率</li>
+</ul>
+<p>因此，对于Redis的核心网络模型，在Redis6.0之前确实都是单线程。是利用epoll（Linux系统）这样的IO多路复用技术在事件循环中不断处理客户端情况</p>
+<p><strong>为什么Redis要选择单线程？</strong></p>
+<ul>
+<li>抛开持久化不谈，Redis是纯内存操作，执行速度非常快，它的性能瓶颈是网络延迟而不是执行速度，因此多线程并不会带来巨大的性能提升</li>
+<li>多线程会导致过多的上下文切换，带来不必要的开销</li>
+<li>引入多线程会面临线程安全问题，必然要引入线程锁这样的安全手段，实现复杂度增高，而且性能会降低</li>
+</ul>
+<h2 id="Redis单线程网络模型执行流程"><a href="#Redis单线程网络模型执行流程" class="headerlink" title="Redis单线程网络模型执行流程"></a>Redis单线程网络模型执行流程</h2><ol>
+<li>监听端口：Redis服务器开始监听指定的端口，等待客户端连接。</li>
+<li>接收客户端连接：当有客户端请求连接到Redis服务器时，服务器会接受连接请求，并创建一个客户端套接字，用于与客户端通信。</li>
+<li>接收命令：一旦客户端与服务器建立连接，客户端可以发送命令请求到服务器。Redis服务器通过套接字接收到客户端发送的命令。</li>
+<li>命令解析：服务器会对接收到的命令进行解析，以确定客户端请求的具体操作。</li>
+<li>执行命令：根据解析的结果，服务器会执行相应的命令操作。由于Redis使用单线程模型，每个命令都会按顺序依次执行，不会并发执行。</li>
+<li>数据读写：在执行命令期间，如果需要读取或修改数据，服务器会从内存中读取数据或将修改后的数据写回内存。</li>
+<li>命令回复：执行完命令后，服务器会将执行结果封装为响应，并通过套接字发送回客户端。</li>
+<li>关闭连接：命令执行完成后，服务器会关闭与客户端的连接，等待下一个连接请求</li>
+</ol>
+<p><img src="/img/loading.gif" data-original="D:\Blog\source\img\redis_netModel.png" alt="redis_netModel"></p>
+<h3 id="多线程改进"><a href="#多线程改进" class="headerlink" title="多线程改进"></a>多线程改进</h3><p>由于影响网络模型速率的是IO操作，所以可以在命令请求处理器的请求数据写入部分使用多线程和将数据写入buf或reply部分使用多线程来提高速度</p>
+<h1 id="Redis通信协议"><a href="#Redis通信协议" class="headerlink" title="Redis通信协议"></a>Redis通信协议</h1><p>Redis是一个CS架构的软件，通信一般分两步（不包括pipeline和PubSub）：</p>
+<ol>
+<li>客户端（client）向服务端（server）发送一条命令</li>
+<li>服务端解析并执行命令，返回响应结果给客户端</li>
+</ol>
+<p>因此客户端发送命令的格式、服务端响应结果的格式必须有一个规范，这个规范就是通信协议。</p>
+<p>而在Redis中采用的是RESP（Redis Serialization Protocol）协议：</p>
+<ol>
+<li>Redis 1.2版本引入了RESP协议</li>
+<li>Redis 2.0版本中成为与Redis服务端通信的标准，称为RESP2</li>
+<li>Redis 6.0版本中，从RESP2升级到了RESP3协议，增加了更多数据类型并且支持6.0的新特性–客户端缓存</li>
+</ol>
+<p>但目前，默认使用的依然是RESP2协议。</p>
+<p>在RESP中，通过首字节的字符来区分不同数据类型，常用的数据类型包括5种：</p>
+<ol>
+<li>单行字符串：首字节是 <code>&#39;+&#39;</code> ，后面跟上单行字符串，以CRLF（ <code>&quot;\r\n&quot;</code> ）结尾。例如返回”OK”： <code>&quot;+OK\r\n&quot;</code></li>
+<li>错误（Errors）：首字节是 <code>&#39;-&#39; </code>，与单行字符串格式一样，只是字符串是异常信息，例如：<code>&quot;-Error message\r\n&quot;</code></li>
+<li>数值：首字节是 <code>&#39;:&#39; </code>，后面跟上数字格式的字符串，以CRLF结尾。例如：<code>&quot;:10\r\n&quot;</code></li>
+<li>多行字符串：首字节是 <code>&#39;$&#39;</code> ，表示二进制安全的字符串，最大支持512MB：<ol>
+<li>如果大小为0，则代表空字符串：<code>&quot;$0\r\n\r\n&quot;</code></li>
+<li>如果大小为-1，则代表不存在：<code>&quot;$-1\r\n&quot;</code></li>
+</ol>
+</li>
+<li>数组：首字节是 <code>&#39;*&#39;</code>， 后面跟上数组元素个数，再跟上元素，元素数据类型不限，如：</li>
+</ol>
+<blockquote>
+<p>*3\r\n</p>
+<p>:10\r\n</p>
+<p>$5\r\nhello\r\n</p>
+<p>*2\r\n$3\r\nage\r\n:10\r\n</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">楪舞飞祈</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/inori/e34c024b.html">http://example.com/inori/e34c024b.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">楪祈のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/redis/">redis</a></div><div class="post_share"><div class="social-share" data-image="https://imgapi.xl0408.top/index.php" data-sites="qq,wechat,twitter,weibo"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/inori/228807ea.html" title="redis内存回收"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">redis内存回收</div></div></a></div><div class="next-post pull-right"><a href="/inori/abcb1f8f.html" title="redis数据结构"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">redis数据结构</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/inori/228807ea.html" title="redis内存回收"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-03</div><div class="title">redis内存回收</div></div></a></div><div><a href="/inori/abcb1f8f.html" title="redis数据结构"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-26</div><div class="title">redis数据结构</div></div></a></div><div><a href="/inori/1e2438b1.html" title="redis分布式缓存"><img class="cover" src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-19</div><div class="title">redis分布式缓存</div></div></a></div><div><a href="/inori/a9e82450.html" title="redis进阶篇"><img class="cover" src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-16</div><div class="title">redis进阶篇</div></div></a></div><div><a href="/inori/8660e5c0.html" title="redis入门篇"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-05</div><div class="title">redis入门篇</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">楪舞飞祈</div><div class="author-info__description">星座になれたら。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">50</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">18</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/inori-320"><i class="fab fa-github"></i><span>My GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:719471785@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p align="center" color="brown">多读书，多看报，少吃零食，多睡觉。</p></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">Linux网络模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%BB%E5%A1%9EIO"><span class="toc-number">1.1.</span> <span class="toc-text">阻塞IO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E9%98%BB%E5%A1%9EIO"><span class="toc-number">1.2.</span> <span class="toc-text">非阻塞IO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">IO多路复用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#select"><span class="toc-number">1.3.1.</span> <span class="toc-text">select</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#poll"><span class="toc-number">1.3.2.</span> <span class="toc-text">poll</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#epoll"><span class="toc-number">1.3.3.</span> <span class="toc-text">epoll</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#epoll%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E9%80%9A%E7%9F%A5%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">epoll中的事件通知模式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E9%A9%B1%E5%8A%A8IO"><span class="toc-number">1.4.</span> <span class="toc-text">信号驱动IO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5IO"><span class="toc-number">1.5.</span> <span class="toc-text">异步IO</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">Redis网络模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-number">2.1.</span> <span class="toc-text">Redis单线程网络模型执行流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%94%B9%E8%BF%9B"><span class="toc-number">2.1.1.</span> <span class="toc-text">多线程改进</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE"><span class="toc-number">3.</span> <span class="toc-text">Redis通信协议</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/inori/228807ea.html" title="redis内存回收"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="redis内存回收"/></a><div class="content"><a class="title" href="/inori/228807ea.html" title="redis内存回收">redis内存回收</a><time datetime="2025-03-03T02:39:21.000Z" title="发表于 2025-03-03 10:39:21">2025-03-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/e34c024b.html" title="redis网络模型"><img src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="redis网络模型"/></a><div class="content"><a class="title" href="/inori/e34c024b.html" title="redis网络模型">redis网络模型</a><time datetime="2025-03-01T00:30:39.000Z" title="发表于 2025-03-01 08:30:39">2025-03-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/abcb1f8f.html" title="redis数据结构"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="redis数据结构"/></a><div class="content"><a class="title" href="/inori/abcb1f8f.html" title="redis数据结构">redis数据结构</a><time datetime="2025-02-26T08:34:39.000Z" title="发表于 2025-02-26 16:34:39">2025-02-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/1e2438b1.html" title="redis分布式缓存"><img src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="redis分布式缓存"/></a><div class="content"><a class="title" href="/inori/1e2438b1.html" title="redis分布式缓存">redis分布式缓存</a><time datetime="2025-02-19T07:30:39.000Z" title="发表于 2025-02-19 15:30:39">2025-02-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/6b525bdc.html" title="二分查找算法入门"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="二分查找算法入门"/></a><div class="content"><a class="title" href="/inori/6b525bdc.html" title="二分查找算法入门">二分查找算法入门</a><time datetime="2025-02-17T06:59:22.000Z" title="发表于 2025-02-17 14:59:22">2025-02-17</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://imgapi.xl0408.top/index.php')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By 楪舞飞祈</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
