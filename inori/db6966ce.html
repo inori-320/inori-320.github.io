@@ -1,0 +1,334 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>JUC并发容器与并发工具 | 楪祈のBlog</title><meta name="author" content="楪舞飞祈"><meta name="copyright" content="楪舞飞祈"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="java多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JUC并发容器与并发工具">
+<meta property="og:url" content="http://example.com/inori/db6966ce.html">
+<meta property="og:site_name" content="楪祈のBlog">
+<meta property="og:description" content="java多线程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://api.suyanw.cn/api/comic3.php">
+<meta property="article:published_time" content="2025-03-19T07:36:39.000Z">
+<meta property="article:modified_time" content="2025-03-19T11:11:58.700Z">
+<meta property="article:author" content="楪舞飞祈">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://api.suyanw.cn/api/comic3.php"><link rel="shortcut icon" href="/img/favicon_32.png"><link rel="canonical" href="http://example.com/inori/db6966ce.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'JUC并发容器与并发工具',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-03-19 19:11:58'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/rss2.xml" title="楪祈のBlog" type="application/rss+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading.gif" data-original="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">59</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://api.suyanw.cn/api/comic3.php')"><nav id="nav"><span id="blog-info"><a href="/" title="楪祈のBlog"><span class="site-name">楪祈のBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">JUC并发容器与并发工具</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-19T07:36:39.000Z" title="发表于 2025-03-19 15:36:39">2025-03-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-19T11:11:58.700Z" title="更新于 2025-03-19 19:11:58">2025-03-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/java/">java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>17分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="JUC并发容器与并发工具"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="并发容器"><a href="#并发容器" class="headerlink" title="并发容器"></a>并发容器</h1><p>在单线程模式下，集合类提供的容器可以说是非常方便了，比如链表、顺序表、哈希表等数据结构，但是这些容器在多线程环境下，并不能正常工作。要解决并发情况下的容器问题，可以给方法前面加个synchronzed，或者使用Vector或是Hashtable，但是它们的效率实在是太低了，完全依靠锁来解决问题。</p>
+<p>JUC提供了专用于并发场景下的容器，比如可以代替<code>ArrayList</code>的<code>CopyOnWriteArrayList</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">    List&lt;String&gt; list = <span class="keyword">new</span> <span class="title class_">CopyOnWriteArrayList</span>&lt;&gt;();  <span class="comment">//使用CopyOnWriteArrayList保证线程安全</span></span><br><span class="line">    <span class="type">Runnable</span> <span class="variable">r</span> <span class="operator">=</span> () -&gt; &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)</span><br><span class="line">            list.add(<span class="string">&quot;aaa&quot;</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(r).start();</span><br><span class="line">    TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">    System.out.println(list.size());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>CopyOnWriteArrayList</code>对于读操作不加锁，而对于写操作是加锁的，类似于读写锁机制，这样就可以保证不丢失读性能的情况下，写操作不会出现问题:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">add</span><span class="params">(E e)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">ReentrantLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="built_in">this</span>.lock;</span><br><span class="line">    lock.lock();   <span class="comment">//直接加锁，保证同一时间只有一个线程进行添加操作</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Object[] elements = getArray();  <span class="comment">//获取当前存储元素的数组</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> elements.length;</span><br><span class="line">        Object[] newElements = Arrays.copyOf(elements, len + <span class="number">1</span>);   <span class="comment">//直接复制一份数组</span></span><br><span class="line">        newElements[len] = e;   <span class="comment">//修改复制出来的数组</span></span><br><span class="line">        setArray(newElements);   <span class="comment">//将元素数组设定为复制出来的数组</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于HashMap的并发容器<code>ConcurrentHashMap</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">    Map&lt;Integer, String&gt; map = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> i;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; <span class="number">100</span>; j++)</span><br><span class="line">                map.put(tmp * <span class="number">100</span> + j, <span class="string">&quot;aaa&quot;</span>);</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">    TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">    System.out.println(map.size());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>JDK7之前，<code>ConcurrentHashMap</code>的原理类似于LongAdder的压力分散思想，既然每个线程都想抢锁，那就多搞几把锁，让每个线程都能拿到，就不会存在等待的问题了，<code>ConcurrentHashMap</code>将所有数据分为一段一段地存储，先分很多段出来，每一段都给一把锁，当一个线程占锁访问时，只会占用其中一把锁，也就是仅仅锁了一小段数据，而其他段的数据依然可以被其他线程正常访问。</p>
+<p>JDK8之后，<code>ConcurrentHashMap</code>采用了CAS算法配合锁机制实现，其底层与<code>HashMap</code>大差不差，<code>HashMap</code>利用了一个用于存放后续节点的头结点的数组，数组里面的每一个元素都是一个头结点（也可以说就是一个链表），当要新插入一个数据时，会先计算该数据的哈希值，找到数组下标，然后创建一个新的节点，添加到对应的链表后面。当链表的长度达到8时，会自动将链表转换为红黑树，这样能使得原有的查询效率大幅度提高</p>
+<p><img src="/img/loading.gif" data-original="/inori/db6966ce/hashmap.png"></p>
+<p><code>ConcurrentHashMap</code>也是维护了一个哈希表：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> V <span class="title function_">put</span><span class="params">(K key, V value)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> putVal(key, value, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> V <span class="title function_">putVal</span><span class="params">(K key, V value, <span class="type">boolean</span> onlyIfAbsent)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (key == <span class="literal">null</span> || value == <span class="literal">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>();</span><br><span class="line">    <span class="type">int</span> <span class="variable">hash</span> <span class="operator">=</span> spread(key.hashCode());    <span class="comment">//计算键的hash值，用于确定在哈希表中的位置</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">binCount</span> <span class="operator">=</span> <span class="number">0</span>;   <span class="comment">//记录链表长度</span></span><br><span class="line">    <span class="keyword">for</span> (Node&lt;K,V&gt;[] tab = table;;) &#123;    <span class="comment">//CAS自旋锁</span></span><br><span class="line">        Node&lt;K,V&gt; f; <span class="type">int</span> n, i, fh;</span><br><span class="line">        <span class="keyword">if</span> (tab == <span class="literal">null</span> || (n = tab.length) == <span class="number">0</span>)</span><br><span class="line">            tab = initTable();    <span class="comment">//如果数组（哈希表）为空要进行初始化</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ((f = tabAt(tab, i = (n - <span class="number">1</span>) &amp; hash)) == <span class="literal">null</span>) &#123;   <span class="comment">//如果哈希表该位置为null，直接CAS插入结点作为头结即可（注意这里会将f设置当前哈希表位置上的头结点）</span></span><br><span class="line">            <span class="keyword">if</span> (casTabAt(tab, i, <span class="literal">null</span>,</span><br><span class="line">                         <span class="keyword">new</span> <span class="title class_">Node</span>&lt;K,V&gt;(hash, key, value, <span class="literal">null</span>)))  </span><br><span class="line">                <span class="keyword">break</span>;                   <span class="comment">// 如果CAS成功，直接break结束put方法，失败那就继续下一轮循环</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((fh = f.hash) == MOVED)   <span class="comment">//头结点哈希值为-1，这里只需要知道是因为正在扩容即可</span></span><br><span class="line">            tab = helpTransfer(tab, f);   <span class="comment">//帮助进行迁移，完事之后再来下一次循环</span></span><br><span class="line">        <span class="keyword">else</span> &#123;     <span class="comment">//正常情况</span></span><br><span class="line">            <span class="type">V</span> <span class="variable">oldVal</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">synchronized</span> (f) &#123;   <span class="comment">//在前面的循环中f肯定是被设定为了哈希表某个位置上的头结点，这里直接把它作为锁加锁了，防止同一时间其他线程也在操作哈希表中这个位置上的链表或是红黑树</span></span><br><span class="line">                <span class="keyword">if</span> (tabAt(tab, i) == f) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (fh &gt;= <span class="number">0</span>) &#123;    <span class="comment">//头结点的哈希值大于等于0说明是链表，下面就是针对链表的一些列操作</span></span><br><span class="line">                        <span class="comment">//...</span></span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (f <span class="keyword">instanceof</span> TreeBin) &#123;   <span class="comment">//针对红黑树的情况进行操作</span></span><br><span class="line">                      	<span class="comment">//在ConcurrentHashMap并不是直接存储的TreeNode，而是TreeBin</span></span><br><span class="line">                        <span class="comment">//...</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          	<span class="comment">//根据链表长度决定是否要进化为红黑树</span></span><br><span class="line">            <span class="keyword">if</span> (binCount != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (binCount &gt;= TREEIFY_THRESHOLD)</span><br><span class="line">                    treeifyBin(tab, i);   <span class="comment">//这里只是可能会进化为红黑树，如果当前哈希表的长度小于64，会优先考虑对哈希表进行扩容</span></span><br><span class="line">                <span class="keyword">if</span> (oldVal != <span class="literal">null</span>)</span><br><span class="line">                    <span class="keyword">return</span> oldVal;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    addCount(<span class="number">1L</span>, binCount);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ConcurrentHashMap</code>的put操作，实际上是对哈希表上的所有头结点元素分别加锁，理论上来说哈希表的长度很大程度上决定了<code>ConcurrentHashMap</code>在同一时间能够处理的线程数量，这也是为什么<code>treeifyBin()</code>会优先考虑为哈希表进行扩容的原因</p>
+<p><img src="/img/loading.gif" data-original="/inori/db6966ce/concurrentHashMap.png"></p>
+<h2 id="阻塞队列"><a href="#阻塞队列" class="headerlink" title="阻塞队列"></a>阻塞队列</h2><p>除了常用的容器类之外，JUC还提供了各种各样的阻塞队列，用于不同的工作场景。</p>
+<p>阻塞队列本身也是队列，基于ReentrantLock实现，它的接口定义如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">BlockingQueue</span>&lt;E&gt; <span class="keyword">extends</span> <span class="title class_">Queue</span>&lt;E&gt; &#123;</span><br><span class="line">   	<span class="type">boolean</span> <span class="title function_">add</span><span class="params">(E e)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//入队，如果队列已满，返回false否则返回true（非阻塞）</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">offer</span><span class="params">(E e)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//入队，如果队列已满，阻塞线程直到能入队为止</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">put</span><span class="params">(E e)</span> <span class="keyword">throws</span> InterruptedException;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//入队，如果队列已满，阻塞线程直到能入队或超时、中断为止，入队成功返回true否则false</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">offer</span><span class="params">(E e, <span class="type">long</span> timeout, TimeUnit unit)</span></span><br><span class="line">        <span class="keyword">throws</span> InterruptedException;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//出队，如果队列为空，阻塞线程直到能出队为止</span></span><br><span class="line">    E <span class="title function_">take</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//出队，如果队列为空，阻塞线程直到能出队超时、中断为止，出队成功正常返回，否则返回null</span></span><br><span class="line">    E <span class="title function_">poll</span><span class="params">(<span class="type">long</span> timeout, TimeUnit unit)</span></span><br><span class="line">        <span class="keyword">throws</span> InterruptedException;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回此队列理想情况下（在没有内存或资源限制的情况下）可以不阻塞地入队的数量，如果没有限制，则返回 Integer.MAX_VALUE</span></span><br><span class="line">    <span class="type">int</span> <span class="title function_">remainingCapacity</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">remove</span><span class="params">(Object o)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">contains</span><span class="params">(Object o)</span>;</span><br><span class="line"></span><br><span class="line">  	<span class="comment">//一次性从BlockingQueue中获取所有可用的数据对象（还可以指定获取数据的个数）</span></span><br><span class="line">    <span class="type">int</span> <span class="title function_">drainTo</span><span class="params">(Collection&lt;? <span class="built_in">super</span> E&gt; c)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">drainTo</span><span class="params">(Collection&lt;? <span class="built_in">super</span> E&gt; c, <span class="type">int</span> maxElements)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>比如现在有一个容量为3的阻塞队列，这个时候一个线程<code>put</code>向其添加了三个元素，第二个线程接着<code>put</code>向其添加三个元素，那么这个时候由于容量已满，会直接被阻塞，而这时第三个线程从队列中取走2个元素，线程二停止阻塞，先丢两个进去，还有一个还是进不去，所以说继续阻塞。</p>
+<p>可以理解为：当队列为空时，获取元素的操作会被阻塞；当队列已满时，添加元素的操作会被阻塞</p>
+<h3 id="常用的实现类"><a href="#常用的实现类" class="headerlink" title="常用的实现类"></a>常用的实现类</h3><ol>
+<li><code>ArrayBlockingQueue</code></li>
+</ol>
+<ul>
+<li>基于数组实现的有界阻塞队列</li>
+<li>初始化时需要指定队列容量:<code>BlockingQueue&lt;Integer&gt; queue = new ArrayBlockingQueue&lt;&gt;(10)</code></li>
+<li>支持公平锁和非公平锁</li>
+</ul>
+<ol start="2">
+<li><code>LinkedBlockingQueue</code></li>
+</ol>
+<ul>
+<li>基于链表实现的可选有界阻塞队列</li>
+<li>默认容量为<code>Integer.MAX_VALUE</code>，可以指定容量:<code>BlockingQueue&lt;Integer&gt; queue = new LinkedBlockingQueue&lt;&gt;(10)</code></li>
+<li>吞吐量通常高于 <code>ArrayBlockingQueue</code></li>
+</ul>
+<ol start="3">
+<li><code>PriorityBlockingQueue</code></li>
+</ol>
+<ul>
+<li>基于堆实现的优先级阻塞队列</li>
+<li>元素按优先级排序，默认自然顺序或通过 <code>Comparator</code> 指定</li>
+<li>无界队列，容量为<code>Integer.MAX_VALUE</code>:<code>PriorityBlockingQueue&lt;Integer&gt; queue = new PriorityBlockingQueue&lt;&gt;()</code></li>
+</ul>
+<ol start="4">
+<li><code>DelayQueue</code></li>
+</ol>
+<ul>
+<li>基于优先级队列实现的延迟队列</li>
+<li>元素必须实现 <code>Delayed</code> 接口，只有在延迟时间到达后才能被取出</li>
+<li>无界队列:<code>DelayQueue&lt;DelayedTask&gt; queue = new DelayQueue&lt;&gt;()</code></li>
+</ul>
+<ol start="5">
+<li><code>SynchronousQueue</code></li>
+</ol>
+<ul>
+<li>一种不存储元素的阻塞队列:<code>SynchronousQueue&lt;Integer&gt; queue = new SynchronousQueue&lt;&gt;()</code></li>
+<li>每个插入操作必须等待另一个线程的移除操作，反之亦然</li>
+<li>适用于线程之间的直接传递数据</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>阻塞队列</strong></th>
+<th><strong>特点</strong></th>
+<th><strong>适用场景</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>ArrayBlockingQueue</code></strong></td>
+<td>基于数组的有界队列，支持公平锁和非公平锁。</td>
+<td>固定大小的队列，生产者-消费者模型。</td>
+</tr>
+<tr>
+<td><strong><code>LinkedBlockingQueue</code></strong></td>
+<td>基于链表的可选有界队列，默认无界，高吞吐量。</td>
+<td>高吞吐量队列，生产者-消费者模型。</td>
+</tr>
+<tr>
+<td><strong><code>PriorityBlockingQueue</code></strong></td>
+<td>基于堆的优先级队列，无界。</td>
+<td>按优先级处理任务，任务调度。</td>
+</tr>
+<tr>
+<td><strong><code>DelayQueue</code></strong></td>
+<td>延迟队列，元素必须实现 <code>Delayed</code> 接口。</td>
+<td>延迟任务调度，缓存过期策略。</td>
+</tr>
+<tr>
+<td><strong><code>SynchronousQueue</code></strong></td>
+<td>不存储元素，直接传递数据。</td>
+<td>线程间直接数据传递，高并发任务分发。</td>
+</tr>
+</tbody></table>
+<h1 id="并发工具类"><a href="#并发工具类" class="headerlink" title="并发工具类"></a>并发工具类</h1><h2 id="计数器锁-CountDownLatch"><a href="#计数器锁-CountDownLatch" class="headerlink" title="计数器锁 CountDownLatch"></a>计数器锁 CountDownLatch</h2><p>CountDownLatch允许一个或多个线程，等待其他线程完成工作。</p>
+<p>比如有这样一个需求：</p>
+<ul>
+<li>有20个计算任务，需要将这些任务的结果全部计算出来后再汇总，每个任务的执行时间未知</li>
+<li>当所有任务结束之后，立即整合统计最终结果</li>
+</ul>
+<p>使用CountDownLatch可以轻松实现：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">    <span class="type">CountDownLatch</span> <span class="variable">latch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CountDownLatch</span>(<span class="number">20</span>);  <span class="comment">//创建一个初始值为20的计数器锁</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep((<span class="type">long</span>) (<span class="number">2000</span> * <span class="keyword">new</span> <span class="title class_">Random</span>().nextDouble()));	<span class="comment">//模拟任务执行耗时</span></span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            latch.countDown();   <span class="comment">//每执行一次计数器都会-1</span></span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//开始等待所有的线程完成，当计数器为0时，恢复运行</span></span><br><span class="line">    latch.await();   <span class="comment">//这个操作可以同时被多个线程执行，一起等待，这里只演示了一个</span></span><br><span class="line">    System.out.println(<span class="string">&quot;任务完成&quot;</span>);</span><br><span class="line">  	<span class="comment">//注意这个计数器只能使用一次，用完只能重新创一个，没有重置的说法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们在调用<code>await()</code>方法之后，实际上就是一个等待计数器衰减为0的过程，而进行自减操作则由各个子线程来完成，当子线程完成工作后，那么就将计数器-1，所有的子线程完成之后，计数器为0，结束等待</p>
+<p>CountDownLatch的基本实现思路：</p>
+<ul>
+<li>利用共享锁实现，同一时刻能有多个线程拥有共享锁，如果一个线程刚获取了共享锁，那么在其之后等待的线程也很有可能能够获取到锁，所以得传播下去继续尝试唤醒后面的结点，并且如果一个线程刚释放了锁，不管是独占锁还是共享锁，都需要唤醒后续等待结点的线程</li>
+<li>在一开始的时候就是已经上了count层锁的状态，也就是<code>state = count</code></li>
+<li><code>await()</code>就是加共享锁，但是必须<code>state</code>为<code>0</code>才能加锁成功，否则按照AQS的机制，会进入等待队列阻塞，加锁成功后结束阻塞</li>
+<li><code>countDown()</code>就是解<code>1</code>层锁，靠这个方法一点一点把<code>state</code>的值减到<code>0</code></li>
+</ul>
+<h2 id="循环屏障-CyclicBarrier"><a href="#循环屏障-CyclicBarrier" class="headerlink" title="循环屏障 CyclicBarrier"></a>循环屏障 CyclicBarrier</h2><p>CyclicBarrier用于让一组线程互相等待，直到所有线程都到达某个屏障点。它的底层实现基于 <code>ReentrantLock</code> 和 <code>Condition</code>，通过计数器机制和条件变量实现线程的等待和唤醒。</p>
+<p>比如需要玩一个开房间游戏，不满足人数不能进，必须等待剩下的人到来之后才能开始游戏，并且保证游戏开始时所有玩家都是同时进入，就可以使用CyclicBarrier：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="type">CyclicBarrier</span> <span class="variable">barrier</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CyclicBarrier</span>(<span class="number">10</span>,   <span class="comment">//创建一个初始值为10的循环屏障</span></span><br><span class="line">                () -&gt; System.out.println(<span class="string">&quot;准备开始&quot;</span>));   <span class="comment">//人等够之后执行的任务</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">finalI</span> <span class="operator">=</span> i;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep((<span class="type">long</span>) (<span class="number">2000</span> * <span class="keyword">new</span> <span class="title class_">Random</span>().nextDouble()));</span><br><span class="line">                System.out.println(<span class="string">&quot;玩家 &quot;</span>+ finalI +<span class="string">&quot; 进入房间进行等待... (&quot;</span>+barrier.getNumberWaiting()+<span class="string">&quot;/10)&quot;</span>);</span><br><span class="line"></span><br><span class="line">                barrier.await();    <span class="comment">//调用await方法进行等待，直到等待的线程足够多为止</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//所有玩家一起进入</span></span><br><span class="line">                System.out.println(<span class="string">&quot;玩家 &quot;</span>+ finalI +<span class="string">&quot; 进入游戏！&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException | BrokenBarrierException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>循环屏障会不断阻挡线程，直到被阻挡的线程足够多时，才能一起通过，并且屏障是可循环的，它在被冲破后，会重新开始计数，继续阻挡后续的线程，直到再次满足预定的线程数量。</p>
+<p>除了自动重置之外，也可以调用<code>reset()</code>方法来手动进行重置操作，同样会重新计数：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">    <span class="type">CyclicBarrier</span> <span class="variable">barrier</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CyclicBarrier</span>(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                barrier.await();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException | BrokenBarrierException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">    Thread.sleep(<span class="number">500</span>);   <span class="comment">//等上面的线程开始运行</span></span><br><span class="line">    System.out.println(<span class="string">&quot;当前屏障前的等待线程数：&quot;</span>+barrier.getNumberWaiting());</span><br><span class="line"></span><br><span class="line">    barrier.reset();</span><br><span class="line">    System.out.println(<span class="string">&quot;重置后屏障前的等待线程数：&quot;</span>+barrier.getNumberWaiting());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在调用<code>reset()</code>之后，处于等待状态下的线程，全部被中断并且抛出<code>BrokenBarrierException</code>异常，循环屏障等待线程数归零。</p>
+<h2 id="信号量-Semaphore"><a href="#信号量-Semaphore" class="headerlink" title="信号量 Semaphore"></a>信号量 Semaphore</h2><p>信号量可以决定某个资源同一时间能够被访问的最大线程数，它相当于对某个资源的访问进行了流量控制。简单来说，它就是一个可以被N个线程占用的排它锁（支持公平和非公平模式，默认是非公平模式），使用时可以在最开始设定Semaphore许可证的数量，每个线程都可以获得1个或n个许可证，当许可证耗尽或不足以供其他线程获取时，其他线程将被阻塞。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ExecutionException, InterruptedException &#123;</span><br><span class="line">    <span class="comment">//每一个Semaphore都会在一开始获得指定的许可证数数量，也就是许可证配额</span></span><br><span class="line">    <span class="type">Semaphore</span> <span class="variable">semaphore</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Semaphore</span>(<span class="number">2</span>);   <span class="comment">//许可证配额设定为2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;	<span class="comment">// 有3个线程抢这2个信号量</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                semaphore.acquire();   <span class="comment">//申请一个许可证，默认申请1个，acquire(n)则表示申请n个</span></span><br><span class="line">                System.out.println(<span class="string">&quot;许可证申请成功！&quot;</span>);</span><br><span class="line">                semaphore.release();   <span class="comment">//归还一个许可证</span></span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以通过Semaphore获取一些常规信息：</p>
+<ul>
+<li><code>availablePermits</code>：剩余许可证数量</li>
+<li><code>hasQueuedThreads</code>：是否存在线程等待许可证</li>
+<li><code>getQueueLength</code>：等待许可证线程数量</li>
+<li><code>drainPermits</code>：回收全部许可证</li>
+</ul>
+<p>Semaphore可以控制对共享资源的并发访问数量，避免资源过载。可以管理数据库连接池、线程池等资源，确保资源的使用不超过限制。可以控制并发任务的数量，避免系统资源耗尽等。</p>
+<h2 id="数据交换-Exchanger"><a href="#数据交换-Exchanger" class="headerlink" title="数据交换 Exchanger"></a>数据交换 Exchanger</h2><p>Exchanger底层实现基于CAS和等待队列，能够实现线程之间的数据交换：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">    Exchanger&lt;String&gt; exchanger = <span class="keyword">new</span> <span class="title class_">Exchanger</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;收到主线程传递的交换数据：&quot;</span>+exchanger.exchange(<span class="string">&quot;AAAA&quot;</span>));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;).start();</span><br><span class="line">    System.out.println(<span class="string">&quot;收到子线程传递的交换数据：&quot;</span>+exchanger.exchange(<span class="string">&quot;BBBB&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Exchanger</code>可以被重复使用，每次交换数据后，可以继续使用</p>
+<p>在调用<code>exchange</code>方法后，当前线程会等待其他线程调用同一个exchanger对象的<code>exchange</code>方法，当另一个线程也调用之后，方法会返回对方线程传入的参数。如果一直没有另一个线程调用<code>exchanger</code>方法，当前线程会进入阻塞状态。</p>
+<h2 id="Fork-Join框架"><a href="#Fork-Join框架" class="headerlink" title="Fork&#x2F;Join框架"></a>Fork&#x2F;Join框架</h2><p>在JDK7时，出现了一个新的框架用于并行执行任务，它能够把大型任务拆分为多个小任务，最后汇总多个小任务的结果，得到整大任务的结果，并且这些小任务都是并行执行的。Fork就是拆分，Join就是合并。它通过工作窃取（Work-Stealing）算法利用多核CPU资源。</p>
+<blockquote>
+<p>工作窃取算法：是指某个线程从其他队列里窃取任务来执行。一个大任务分割为若干个互不依赖的子任务，为了减少线程间的竞争，把这些子任务分别放到不同的队列里，并为每个队列创建一个单独的线程来执行队列里的任务，线程和队列一一对应。但是有的线程会先把自己队列里的任务干完，而其他线程对应的队列里还有任务待处理。干完活的线程与其等着，不如帮其他线程干活，于是它就去其他线程的队列里窃取一个任务来执行。</p>
+</blockquote>
+<p>Fork&#x2F;Join框架的核心类包括：</p>
+<ol>
+<li><code>ForkJoinPool</code>：任务执行的线程池，负责管理线程和任务队列</li>
+<li><code>ForkJoinTask</code>：表示一个任务，通常使用其子类：<ul>
+<li><code>RecursiveAction</code>：用于没有返回值的任务</li>
+<li><code>RecursiveTask</code>：用于有返回值的任务</li>
+</ul>
+</li>
+</ol>
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><ol>
+<li>任务拆分：将一个大任务拆分为多个小任务，直到任务足够小，可以直接执行</li>
+<li>任务执行：将小任务提交到 <code>ForkJoinPool</code> 中执行</li>
+<li>结果合并：将小任务的执行结果合并，得到最终结果</li>
+</ol>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>计算数组中1~1000的总和：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.RecursiveTask;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ForkJoinPool;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ForkJoinSumExample</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] array = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">1000</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">            array[i] = i + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">ForkJoinPool</span> <span class="variable">pool</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ForkJoinPool</span>();</span><br><span class="line">        <span class="type">SumTask</span> <span class="variable">task</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SumTask</span>(array, <span class="number">0</span>, array.length);</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> pool.invoke(task); <span class="comment">// 提交任务并获取结果</span></span><br><span class="line">        System.out.println(<span class="string">&quot;数组元素和: &quot;</span> + result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SumTask</span> <span class="keyword">extends</span> <span class="title class_">RecursiveTask</span>&lt;Integer&gt; &#123;	<span class="comment">//继承RecursiveTask，这样才可以作为一个任务，泛型就是计算结果类型</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span>[] array;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> start;	<span class="comment">// 限定范围</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> end;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">THRESHOLD</span> <span class="operator">=</span> <span class="number">125</span>; <span class="comment">// 任务拆分的阈值，拆分成8组</span></span><br><span class="line"></span><br><span class="line">    SumTask(<span class="type">int</span>[] array, <span class="type">int</span> start, <span class="type">int</span> end) &#123;</span><br><span class="line">        <span class="built_in">this</span>.array = array;</span><br><span class="line">        <span class="built_in">this</span>.start = start;</span><br><span class="line">        <span class="built_in">this</span>.end = end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Integer <span class="title function_">compute</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (end - start &lt;= THRESHOLD) &#123;</span><br><span class="line">            <span class="comment">// 任务足够小，直接计算</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start; i &lt; end; i++) &#123;</span><br><span class="line">                sum += array[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> sum;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 任务较大，拆分为两个子任务，类似于递归</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> (start + end) / <span class="number">2</span>;</span><br><span class="line">            <span class="type">SumTask</span> <span class="variable">leftTask</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SumTask</span>(array, start, mid);</span><br><span class="line">            <span class="type">SumTask</span> <span class="variable">rightTask</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SumTask</span>(array, mid, end);</span><br><span class="line">            leftTask.fork(); <span class="comment">// 将leftTask提交到ForkJoinPool中，由其他线程异步执行，如果范围仍然较大会继续拆分</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">rightResult</span> <span class="operator">=</span> rightTask.compute(); <span class="comment">// 在当前线程中执行右子任务，如果范围仍然较大会继续拆分</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">leftResult</span> <span class="operator">=</span> leftTask.join(); <span class="comment">// 获取左子任务的结果</span></span><br><span class="line">            <span class="keyword">return</span> leftResult + rightResult; <span class="comment">// 合并结果</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Arrays工具类提供的并行排序也是利用了ForkJoinPool来实现：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">parallelSort</span><span class="params">(<span class="type">byte</span>[] a)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> a.length, p, g;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= MIN_ARRAY_SORT_GRAN ||</span><br><span class="line">        (p = ForkJoinPool.getCommonPoolParallelism()) == <span class="number">1</span>)</span><br><span class="line">        DualPivotQuicksort.sort(a, <span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">ArraysParallelSortHelpers</span>.FJByte.Sorter</span><br><span class="line">            (<span class="literal">null</span>, a, <span class="keyword">new</span> <span class="title class_">byte</span>[n], <span class="number">0</span>, n, <span class="number">0</span>,</span><br><span class="line">             ((g = n / (p &lt;&lt; <span class="number">2</span>)) &lt;= MIN_ARRAY_SORT_GRAN) ?</span><br><span class="line">             MIN_ARRAY_SORT_GRAN : g).invoke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">楪舞飞祈</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/inori/db6966ce.html">http://example.com/inori/db6966ce.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">楪祈のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/java/">java</a></div><div class="post_share"><div class="social-share" data-image="https://api.suyanw.cn/api/comic3.php" data-sites="qq,wechat,twitter,weibo"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/inori/4fdd9583.html" title="JUC-锁类和原子类"><img class="cover" src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JUC-锁类和原子类</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/inori/4fdd9583.html" title="JUC-锁类和原子类"><img class="cover" src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-17</div><div class="title">JUC-锁类和原子类</div></div></a></div><div><a href="/inori/e45c1800.html" title="JVM类与类加载"><img class="cover" src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-14</div><div class="title">JVM类与类加载</div></div></a></div><div><a href="/inori/4af053c8.html" title="JVM垃圾回收机制"><img class="cover" src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-14</div><div class="title">JVM垃圾回收机制</div></div></a></div><div><a href="/inori/a89a12f2.html" title="JVM概述与内存管理"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-13</div><div class="title">JVM概述与内存管理</div></div></a></div><div><a href="/inori/98835b85.html" title="SpringCloud微服务入门(二)"><img class="cover" src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-12</div><div class="title">SpringCloud微服务入门(二)</div></div></a></div><div><a href="/inori/37b2c0e7.html" title="SpringCloud微服务入门(一)"><img class="cover" src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-12</div><div class="title">SpringCloud微服务入门(一)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading.gif" data-original="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">楪舞飞祈</div><div class="author-info__description">星座になれたら。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">59</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/inori-320"><i class="fab fa-github"></i><span>My GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:719471785@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p align="center" color="brown">多读书，多看报，少吃零食，多睡觉。</p></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">并发容器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97"><span class="toc-number">1.1.</span> <span class="toc-text">阻塞队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="toc-number">1.1.1.</span> <span class="toc-text">常用的实现类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text">并发工具类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E6%95%B0%E5%99%A8%E9%94%81-CountDownLatch"><span class="toc-number">2.1.</span> <span class="toc-text">计数器锁 CountDownLatch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E5%B1%8F%E9%9A%9C-CyclicBarrier"><span class="toc-number">2.2.</span> <span class="toc-text">循环屏障 CyclicBarrier</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F-Semaphore"><span class="toc-number">2.3.</span> <span class="toc-text">信号量 Semaphore</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BA%A4%E6%8D%A2-Exchanger"><span class="toc-number">2.4.</span> <span class="toc-text">数据交换 Exchanger</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fork-Join%E6%A1%86%E6%9E%B6"><span class="toc-number">2.5.</span> <span class="toc-text">Fork&#x2F;Join框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">2.5.1.</span> <span class="toc-text">工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.5.2.</span> <span class="toc-text">示例</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/inori/db6966ce.html" title="JUC并发容器与并发工具"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JUC并发容器与并发工具"/></a><div class="content"><a class="title" href="/inori/db6966ce.html" title="JUC并发容器与并发工具">JUC并发容器与并发工具</a><time datetime="2025-03-19T07:36:39.000Z" title="发表于 2025-03-19 15:36:39">2025-03-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/4fdd9583.html" title="JUC-锁类和原子类"><img src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JUC-锁类和原子类"/></a><div class="content"><a class="title" href="/inori/4fdd9583.html" title="JUC-锁类和原子类">JUC-锁类和原子类</a><time datetime="2025-03-17T07:38:24.000Z" title="发表于 2025-03-17 15:38:24">2025-03-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/e45c1800.html" title="JVM类与类加载"><img src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JVM类与类加载"/></a><div class="content"><a class="title" href="/inori/e45c1800.html" title="JVM类与类加载">JVM类与类加载</a><time datetime="2025-03-14T06:22:49.000Z" title="发表于 2025-03-14 14:22:49">2025-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/4af053c8.html" title="JVM垃圾回收机制"><img src="/img/loading.gif" data-original="https://imgapi.xl0408.top/index.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JVM垃圾回收机制"/></a><div class="content"><a class="title" href="/inori/4af053c8.html" title="JVM垃圾回收机制">JVM垃圾回收机制</a><time datetime="2025-03-14T04:55:14.000Z" title="发表于 2025-03-14 12:55:14">2025-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/inori/a89a12f2.html" title="JVM概述与内存管理"><img src="/img/loading.gif" data-original="https://api.suyanw.cn/api/comic3.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JVM概述与内存管理"/></a><div class="content"><a class="title" href="/inori/a89a12f2.html" title="JVM概述与内存管理">JVM概述与内存管理</a><time datetime="2025-03-13T02:19:28.000Z" title="发表于 2025-03-13 10:19:28">2025-03-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://api.suyanw.cn/api/comic3.php')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By 楪舞飞祈</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
